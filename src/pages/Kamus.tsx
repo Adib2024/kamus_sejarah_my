@@ -2,13 +2,13 @@ import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 're
 import { entries, entryText, letterCount, LETTERS, type Entry } from '../lib/data'
 import { highlighter, search } from '../lib/search'
 import { copyText, dailyIndex, shareEntry } from '../lib/store'
-import { Defs, Icon, Marked } from '../components/ui'
+import { Defs, Flourish, Icon, Marked } from '../components/ui'
 
 export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: RegExp | null }) {
   return (
-    <article className="entry group rounded-2xl border border-line bg-card p-4 sm:px-5">
+    <article className="entry folio px-5 py-4">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-lg leading-snug font-semibold text-brand">
+        <h3 className="font-serif text-[1.35rem] leading-snug font-bold tracking-wide text-brand">
           <a href={`#/istilah/${e.id}`} className="hover:underline">
             <Marked text={e.term} hl={hl} />
           </a>
@@ -19,7 +19,7 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
             aria-label={`Salin ${e.term}`}
             title="Salin"
             onClick={() => copyText(entryText(e))}
-            className="grid size-10 place-items-center rounded-lg hover:bg-tint hover:text-ink"
+            className="grid size-10 place-items-center rounded-md hover:bg-tint hover:text-ink"
           >
             <Icon name="copy" className="size-[18px]" />
           </button>
@@ -28,7 +28,7 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
             aria-label={`Kongsi ${e.term}`}
             title="Kongsi"
             onClick={() => shareEntry(e.term, entryText(e), e.id)}
-            className="grid size-10 place-items-center rounded-lg hover:bg-tint hover:text-ink"
+            className="grid size-10 place-items-center rounded-md hover:bg-tint hover:text-ink"
           >
             <Icon name="share" className="size-[18px]" />
           </button>
@@ -44,20 +44,15 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
 function Daily() {
   const e = entries[dailyIndex(entries.length)]
   return (
-    <section
-      aria-labelledby="harini"
-      className="relative overflow-hidden rounded-2xl border border-line bg-card p-5 sm:p-6"
-    >
-      <div className="absolute inset-y-0 left-0 w-1.5 bg-gold" />
-      <p id="harini" className="flex items-center gap-1.5 text-xs font-bold tracking-widest text-gold uppercase">
-        <Icon name="star" className="size-4" /> Istilah Hari Ini
-      </p>
-      <h2 className="mt-2 font-serif text-2xl font-semibold text-brand">
+    <section aria-labelledby="harini" className="ornate px-7 py-8 text-center sm:px-12">
+      <p id="harini" className="rubric">Istilah Hari Ini</p>
+      <h2 className="mt-2 font-serif text-4xl leading-tight font-bold tracking-wide text-brand">
         <a href={`#/istilah/${e.id}`} className="hover:underline">
           {e.term}
         </a>
       </h2>
-      <div className="mt-1.5 leading-relaxed">
+      <Flourish className="my-3" />
+      <div className="text-lg leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
         <Defs defs={e.defs} />
       </div>
     </section>
@@ -110,14 +105,14 @@ export default function Kamus({
 
   const searching = !!result
   const chip = (active: boolean) =>
-    `grid h-10 min-w-10 shrink-0 place-items-center rounded-lg px-2 text-sm font-semibold transition ${
+    `grid h-10 min-w-10 shrink-0 place-items-center rounded-md px-2 font-serif text-lg font-bold transition ${
       active ? 'bg-brand text-on-brand' : 'text-ink hover:bg-tint'
     }`
 
   return (
     <div>
       {/* carian — melekat di atas */}
-      <div className="sticky top-14 z-20 -mx-4 bg-paper/95 px-4 pt-4 pb-3 backdrop-blur sm:top-16">
+      <div className="sticky top-[68px] z-20 -mx-4 border-b border-line/60 bg-paper/95 px-4 pt-4 pb-2 backdrop-blur sm:top-[76px]">
         <div className="relative">
           <Icon name="search" className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-soft" />
           <input
@@ -133,7 +128,7 @@ export default function Kamus({
             onKeyDown={(ev) => ev.key === 'Escape' && setQuery('')}
             placeholder={`Cari ${entries.length} istilah atau maksud…`}
             aria-label="Cari istilah atau maksud"
-            className="h-13 w-full rounded-2xl border border-line bg-card pr-12 pl-12 text-base shadow-sm outline-none placeholder:text-soft focus:border-brand focus:ring-2 focus:ring-brand/20 [&::-webkit-search-cancel-button]:hidden"
+            className="h-13 w-full rounded-md border border-gold/60 bg-card pr-12 pl-12 text-lg shadow-sm outline-none placeholder:text-soft placeholder:italic focus:border-brand focus:ring-2 focus:ring-brand/20 [&::-webkit-search-cancel-button]:hidden"
           />
           {query && (
             <button
@@ -143,7 +138,7 @@ export default function Kamus({
                 setQuery('')
                 input.current?.focus()
               }}
-              className="absolute top-1/2 right-2 grid size-10 -translate-y-1/2 place-items-center rounded-lg text-soft hover:bg-tint hover:text-ink"
+              className="absolute top-1/2 right-2 grid size-10 -translate-y-1/2 place-items-center rounded-md text-soft hover:bg-tint hover:text-ink"
             >
               <Icon name="x" />
             </button>
@@ -175,7 +170,7 @@ export default function Kamus({
         )}
       </div>
 
-      <p role="status" className="mt-1 mb-3 text-sm text-soft">
+      <p role="status" className="mt-3 mb-3 text-center text-soft italic">
         {searching
           ? result.items.length
             ? result.fuzzy
@@ -184,7 +179,7 @@ export default function Kamus({
             : ''
           : letter
             ? `${letterCount[letter]} istilah bermula dengan huruf ${letter}`
-            : `${entries.length} istilah · A hingga Z`}
+            : ''}
       </p>
 
       {searching ? (
@@ -195,22 +190,31 @@ export default function Kamus({
             ))}
           </div>
         ) : (
-          <div className="rounded-2xl border border-dashed border-line px-6 py-14 text-center">
+          <div className="rounded-md border border-dashed border-line px-6 py-14 text-center">
             <p className="font-serif text-xl font-semibold">Tiada hasil untuk “{deferred.trim()}”</p>
             <p className="mt-2 text-soft">Semak ejaan, atau cuba perkataan yang lebih pendek.</p>
           </div>
         )
       ) : (
         <div className="space-y-8">
-          {!letter && <Daily />}
+          {!letter && (
+            <>
+              <div className="pt-2 text-center">
+                <p lang="ms-Arab" dir="rtl" className="text-2xl text-gold">قاموس سجاره</p>
+                <h1 className="font-serif text-5xl leading-none font-bold tracking-wide text-brand">Kamus Sejarah</h1>
+                <Flourish className="mt-3" />
+              </div>
+              <Daily />
+            </>
+          )}
           {groups.map(([l, list]) => (
             <section key={l} aria-labelledby={`huruf-${l}`}>
-              <h2
-                id={`huruf-${l}`}
-                className="mb-3 flex items-baseline gap-3 border-b border-line pb-1.5 font-serif text-3xl font-semibold text-gold"
-              >
-                {l}
-                <span className="font-sans text-xs font-medium tracking-wide text-soft">{list.length} istilah</span>
+              <h2 id={`huruf-${l}`} className="mb-5 flex items-center gap-4" aria-label={`Huruf ${l}, ${list.length} istilah`}>
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/70" />
+                <span className="grid size-12 rotate-45 place-items-center border border-gold bg-brand shadow-sm ring-1 ring-gold/50 ring-offset-2 ring-offset-paper">
+                  <span className="-rotate-45 font-serif text-3xl leading-none font-bold text-on-brand">{l}</span>
+                </span>
+                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/70" />
               </h2>
               <div className="space-y-2.5">
                 {list.map((e) => (

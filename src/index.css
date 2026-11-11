@@ -3,30 +3,30 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: "Inter Variable";
+  font-family: "Cormorant Garamond Variable";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 300 700;
   font-display: swap;
-  src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Inter Variable";
+  font-family: "EB Garamond Variable";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-normal.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "EB Garamond Variable";
   font-style: italic;
-  font-weight: 100 900;
+  font-weight: 400 800;
   font-display: swap;
-  src: url("@fontsource-variable/inter/files/inter-latin-wght-italic.woff2") format("woff2-variations");
-}
-@font-face {
-  font-family: "Lora Variable";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("@fontsource-variable/lora/files/lora-latin-wght-normal.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-italic.woff2") format("woff2-variations");
 }
 
 @theme inline {
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Lora Variable", ui-serif, Georgia, serif;
+  --font-sans: "EB Garamond Variable", Georgia, "Times New Roman", serif;
+  --font-serif: "Cormorant Garamond Variable", "EB Garamond Variable", Georgia, serif;
   --color-paper: var(--paper);
   --color-card: var(--card);
   --color-ink: var(--ink);
@@ -43,49 +43,52 @@
 }
 
 :root {
-  --paper: #f7f4ee;
-  --card: #ffffff;
-  --ink: #1b2333;
-  --soft: #586276;
-  --line: #e4ded2;
-  --brand: #1f3a5f;
-  --on-brand: #ffffff;
-  --bar: #1f3a5f;
-  --gold: #9a6210;
-  --tint: #edf1f7;
-  --ok: #1b7548;
-  --bad: #b3362b;
-  --hl: #fde6a0;
+  /* kertas manuskrip lama, dakwat merah hati, emas */
+  --paper: #eee1c4;
+  --card: #faf3df;
+  --ink: #2a1c10;
+  --soft: #6a563c;
+  --line: #d3bd8e;
+  --brand: #7b1e1e;
+  --on-brand: #fbf3df;
+  --bar: #6a1717;
+  --gold: #86600c;
+  --tint: #f0e2bd;
+  --ok: #2f6b3a;
+  --bad: #a3271d;
+  --hl: #f1cf6e;
   color-scheme: light;
 }
 .dark {
-  --paper: #0e131d;
-  --card: #161c2a;
-  --ink: #e9ecf2;
-  --soft: #9ca6b8;
-  --line: #29324a;
-  --brand: #9dbdf0;
-  --on-brand: #0e131d;
-  --bar: #131b2c;
-  --gold: #e3b65f;
-  --tint: #1c2538;
-  --ok: #5fcf96;
-  --bad: #f08a7f;
-  --hl: #6d5512;
+  --paper: #17110b;
+  --card: #221911;
+  --ink: #ecdfc6;
+  --soft: #b5a283;
+  --line: #4d3b22;
+  --brand: #e6b566;
+  --on-brand: #1d140c;
+  --bar: #4a1212;
+  --gold: #d9a441;
+  --tint: #2e2115;
+  --ok: #86cb9d;
+  --bad: #f0937f;
+  --hl: #6d4f10;
   color-scheme: dark;
 }
 
 html {
-  font-size: 100%;
+  font-size: 112.5%;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
-html[data-fs="1"] { font-size: 112.5%; }
-html[data-fs="2"] { font-size: 125%; }
+html[data-fs="1"] { font-size: 125%; }
+html[data-fs="2"] { font-size: 140%; }
 
 body {
-  background: var(--paper);
+  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .22  0 0 0 0 .08  0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url%28%23n%29' opacity='.16'/%3E%3C/svg%3E");
   color: var(--ink);
+  font-variant-numeric: lining-nums;
+  overflow-wrap: anywhere;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -103,7 +106,7 @@ mark {
 }
 
 /* senarai panjang: pelayar hanya lukis kad yang kelihatan */
-.entry { content-visibility: auto; contain-intrinsic-size: auto 96px; }
+.entry { content-visibility: auto; contain-intrinsic-size: auto 110px; }
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -133,4 +136,58 @@ mark {
   html { scroll-behavior: auto; }
   .flip-inner { transition: none; }
   .rise { animation: none; }
+}
+
+/* ---------- gaya manuskrip ---------- */
+
+/* helaian: bingkai dua garis seperti halaman hikayat */
+.folio {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+/* panel utama: bingkai emas dengan hiasan penjuru */
+.ornate {
+  position: relative;
+  background: var(--card);
+  border: 1px solid #b08a2e;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px color-mix(in srgb, #b08a2e 55%, transparent), 0 2px 10px rgb(60 35 10 / 0.12);
+}
+.ornate::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") top left / 34px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='translate%2834 0%29 scale%28-1 1%29' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") top right / 34px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='translate%280 34%29 scale%281 -1%29' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") bottom left / 34px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='translate%2834 34%29 scale%28-1 -1%29' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") bottom right / 34px no-repeat;
+}
+
+/* jalur songket */
+.songket {
+  height: 12px;
+  background: #4f0f0f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='12'%3E%3Cpath d='M0 6l7-5 7 5-7 5zM14 6l7-5 7 5-7 5z' fill='none' stroke='%23b08a2e' stroke-width='1'/%3E%3Cpath d='M7 4l2.5 2-2.5 2-2.5-2zM21 4l2.5 2-2.5 2-2.5-2z' fill='%23b08a2e'/%3E%3C/svg%3E") repeat-x center / 28px 12px;
+  border-block: 1px solid #b08a2e;
+}
+
+/* label kecil ala rubrik */
+.rubric {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+kbd {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 0.3em;
+  background: var(--card);
 }
