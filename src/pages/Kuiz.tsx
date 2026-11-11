@@ -155,7 +155,7 @@ export default function Kuiz() {
               <Rich runs={q.answer.defs[0]} />
             </p>
           ) : (
-            <p className="mt-3 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">{q.answer.term}</p>
+            <p className="mt-3 font-serif text-2xl leading-tight font-bold tracking-wide text-brand sm:text-3xl">{q.answer.term}</p>
           )}
         </div>
 
@@ -169,7 +169,7 @@ export default function Kuiz() {
                 type="button"
                 disabled={answered}
                 onClick={() => pick(o)}
-                className={`flex min-h-14 items-center gap-3 rounded-md border px-4 py-3 text-left text-lg transition disabled:cursor-default ${
+                className={`flex min-h-14 items-center gap-3 rounded-lg border px-4 py-3 text-left text-[1.05rem] transition disabled:cursor-default ${
                   right
                     ? 'border-ok bg-ok/10'
                     : wrong
@@ -186,7 +186,7 @@ export default function Kuiz() {
                 >
                   {right ? <Icon name="check" className="size-4" /> : wrong ? <Icon name="x" className="size-4" /> : 'ABCD'[n]}
                 </span>
-                <span className={q.kind === 'istilah' ? 'font-serif text-base font-bold' : 'leading-snug'}>
+                <span className={q.kind === 'istilah' ? 'font-serif font-bold tracking-wide' : 'leading-snug'}>
                   {q.kind === 'istilah' ? o.term : <Rich runs={o.defs[0]} />}
                 </span>
               </button>

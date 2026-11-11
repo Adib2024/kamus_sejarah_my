@@ -8,7 +8,7 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
   return (
     <article className="entry folio px-5 py-4">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-[1.05rem] leading-snug font-bold text-brand">
+        <h3 className="font-serif text-lg leading-snug font-bold tracking-wide text-brand">
           <a href={`#/istilah/${e.id}`} className="hover:underline">
             <Marked text={e.term} hl={hl} />
           </a>
@@ -34,7 +34,7 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
           </button>
         </div>
       </div>
-      <div className="mt-1.5 leading-relaxed text-ink/90">
+      <div className="mt-1.5 text-[1.05rem] leading-relaxed">
         <Defs defs={e.defs} hl={hl} />
       </div>
     </article>
@@ -44,15 +44,14 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
 function Daily() {
   const e = entries[dailyIndex(entries.length)]
   return (
-    <section aria-labelledby="harini" className="ornate px-7 py-8 text-center sm:px-12">
+    <section aria-labelledby="harini" className="ornate px-6 py-7 text-center sm:px-10">
       <p id="harini" className="rubric">Istilah Hari Ini</p>
-      <h2 className="mt-2 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">
+      <h2 className="mt-2 font-serif text-2xl leading-tight font-bold tracking-wide text-brand sm:text-3xl">
         <a href={`#/istilah/${e.id}`} className="hover:underline">
           {e.term}
         </a>
       </h2>
-      <Flourish className="my-3" />
-      <div className="text-lg leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
+      <div className="mt-3 text-lg leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
         <Defs defs={e.defs} />
       </div>
     </section>
@@ -112,7 +111,7 @@ export default function Kamus({
   return (
     <div>
       {/* carian — melekat di atas */}
-      <div className="sticky top-[68px] z-20 -mx-4 border-b border-line/60 bg-paper/95 px-4 pt-4 pb-2 backdrop-blur sm:top-[76px]">
+      <div className="sticky top-[59px] z-20 -mx-4 border-b border-line bg-paper/95 px-4 pt-4 pb-2 backdrop-blur sm:top-[67px]">
         <div className="relative">
           <Icon name="search" className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-soft" />
           <input
@@ -128,7 +127,7 @@ export default function Kamus({
             onKeyDown={(ev) => ev.key === 'Escape' && setQuery('')}
             placeholder={`Cari ${entries.length} istilah atau maksud…`}
             aria-label="Cari istilah atau maksud"
-            className="h-13 w-full rounded-md border border-gold/60 bg-card pr-12 pl-12 text-lg shadow-sm outline-none placeholder:text-soft placeholder:italic focus:border-brand focus:ring-2 focus:ring-brand/20 [&::-webkit-search-cancel-button]:hidden"
+            className="h-13 w-full rounded-lg border border-line bg-card pr-12 pl-12 text-lg shadow-sm outline-none placeholder:text-soft focus:border-brand focus:ring-2 focus:ring-brand/20 [&::-webkit-search-cancel-button]:hidden"
           />
           {query && (
             <button
@@ -170,16 +169,14 @@ export default function Kamus({
         )}
       </div>
 
-      <p role="status" className="mt-3 mb-3 text-center text-soft italic">
+      <p role="status" className="mt-3 mb-3 text-sm text-soft empty:hidden">
         {searching
           ? result.items.length
             ? result.fuzzy
               ? `Tiada padanan tepat. Mungkin maksud anda:`
               : `${result.items.length} hasil untuk “${deferred.trim()}”`
             : ''
-          : letter
-            ? `${letterCount[letter]} istilah bermula dengan huruf ${letter}`
-            : ''}
+          : ''}
       </p>
 
       {searching ? (
@@ -200,8 +197,8 @@ export default function Kamus({
           {!letter && (
             <>
               <div className="pt-2 text-center">
-                <p lang="ms-Arab" dir="rtl" className="text-2xl text-gold">قاموس سجاره</p>
-                <h1 className="font-serif text-3xl leading-tight font-bold text-brand sm:text-4xl">Kamus Sejarah</h1>
+                <p lang="ms-Arab" dir="rtl" className="text-xl text-gold">قاموس سجاره</p>
+                <h1 className="font-[family-name:var(--font-display)] text-3xl leading-tight font-bold text-brand sm:text-4xl">Kamus Sejarah</h1>
                 <Flourish className="mt-3" />
               </div>
               <Daily />
@@ -209,12 +206,9 @@ export default function Kamus({
           )}
           {groups.map(([l, list]) => (
             <section key={l} aria-labelledby={`huruf-${l}`}>
-              <h2 id={`huruf-${l}`} className="mb-5 flex items-center gap-4" aria-label={`Huruf ${l}, ${list.length} istilah`}>
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/70" />
-                <span className="grid size-12 rotate-45 place-items-center border border-gold bg-brand shadow-sm ring-1 ring-gold/50 ring-offset-2 ring-offset-paper">
-                  <span className="-rotate-45 font-serif text-2xl leading-none font-bold text-on-brand">{l}</span>
-                </span>
-                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/70" />
+              <h2 id={`huruf-${l}`} className="mb-3 flex items-baseline gap-3 border-b border-line pb-1" aria-label={`Huruf ${l}, ${list.length} istilah`}>
+                <span className="font-serif text-4xl leading-none font-bold text-brand">{l}</span>
+                <span className="text-sm text-soft">{list.length} istilah</span>
               </h2>
               <div className="space-y-2.5">
                 {list.map((e) => (

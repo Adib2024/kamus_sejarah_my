@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { entries, letterCount, LETTERS, type Entry } from '../lib/data'
 import { shuffle, useStored } from '../lib/store'
-import { btnGhost, btnPrimary, Chips, Defs, Flourish, Icon, PageTitle } from '../components/ui'
+import { btnGhost, btnPrimary, Chips, Defs, Icon, PageTitle } from '../components/ui'
 
 type Session = { deck: Entry[]; pos: number; flipped: boolean; known: Entry[]; unknown: Entry[] }
 
@@ -151,17 +151,15 @@ export default function Flashcard() {
         <div className={`flip-inner ${s.flipped ? 'is-flipped' : ''}`}>
           <div className="flip-face ornate flex min-h-80 flex-col items-center justify-center p-8 text-center">
             <p className="rubric">Istilah</p>
-            <p className="mt-4 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">{card.term}</p>
-            <Flourish className="mt-4" />
-            <p className="mt-4 text-soft italic">Ketik untuk lihat maksud</p>
+            <p className="mt-4 font-serif text-3xl leading-tight font-bold tracking-wide text-brand sm:text-4xl">{card.term}</p>
+            <p className="mt-6 text-sm text-soft">Ketik untuk lihat maksud</p>
           </div>
           <div
             aria-hidden={!s.flipped}
             className="flip-face flip-back ornate flex min-h-80 flex-col justify-center px-9 py-10 text-center"
           >
             <p className="rubric">{card.term}</p>
-            <Flourish className="mt-2" />
-            <div className="mt-3 text-xl leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
+            <div className="mt-4 text-xl leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
               <Defs defs={card.defs} />
             </div>
           </div>

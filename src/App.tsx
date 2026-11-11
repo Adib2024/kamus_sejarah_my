@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRoute, useStored, useToast } from './lib/store'
-import { Flourish, Icon } from './components/ui'
+import { Icon } from './components/ui'
 import Kamus from './pages/Kamus'
 import Istilah from './pages/Istilah'
 import Flashcard from './pages/Flashcard'
@@ -66,7 +66,7 @@ export default function App() {
         <div className="mx-auto flex h-14 max-w-3xl items-center gap-2 px-4 sm:h-16">
           <a href="#/" className="flex min-w-0 items-center gap-2.5" onClick={() => { setQuery(''); setLetter('') }}>
             <img src="./favicon.svg" alt="" className="size-9 rounded-md" />
-            <span className="truncate font-serif text-base font-bold text-[#f6e3b0] sm:text-xl">Kamus Sejarah MY</span>
+            <span className="truncate font-[family-name:var(--font-display)] text-base font-bold text-[#f6e3b0] sm:text-xl">Kamus Sejarah MY</span>
           </a>
 
           <nav aria-label="Utama" className="ml-auto hidden items-center gap-1 sm:flex">
@@ -75,7 +75,7 @@ export default function App() {
                 key={tab.path}
                 href={`#/${tab.path}`}
                 aria-current={current === tab.path ? 'page' : undefined}
-                className={`rounded-md px-3 py-1.5 font-serif text-sm font-semibold transition ${
+                className={`rounded-md px-3 py-1.5 font-semibold transition ${
                   current === tab.path ? 'bg-black/25 text-[#f6e3b0] ring-1 ring-[#b08a2e]/60' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
               >
@@ -122,8 +122,7 @@ export default function App() {
             Halaman tidak ditemui. <a href="#/" className="font-semibold text-brand underline">Kembali ke kamus</a>
           </p>
         )}
-        <footer className="mt-14 text-center text-soft">
-          <Flourish className="mb-3" />
+        <footer className="mt-14 border-t border-line pt-5 text-center text-sm text-soft">
           Penulis: <span className="font-semibold text-ink">Cg Surina</span> · Dibangunkan oleh{' '}
           <span className="font-semibold text-ink">Adib</span>
         </footer>
@@ -140,7 +139,7 @@ export default function App() {
               key={tab.path}
               href={`#/${tab.path}`}
               aria-current={current === tab.path ? 'page' : undefined}
-              className={`flex h-16 flex-col items-center justify-center gap-1 font-serif text-[0.62rem] font-bold ${
+              className={`flex h-16 flex-col items-center justify-center gap-1 text-xs font-semibold ${
                 current === tab.path ? 'text-brand' : 'text-soft'
               }`}
             >
