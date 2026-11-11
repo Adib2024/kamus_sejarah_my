@@ -80,6 +80,7 @@
 }
 
 html {
+  overflow-x: clip;
   font-size: 100%;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -254,6 +255,28 @@ mark {
   box-shadow: 0 0 0 4px rgb(198 161 91 / 0.22), 0 14px 34px -18px rgb(16 28 44 / 0.45);
 }
 
+/* rel: di telefon item disusun melintang dan boleh dileret; dari 640px ia menjadi grid biasa */
+@media (max-width: 639px) {
+  .rail {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.25rem;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * {
+    min-width: 0;
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+}
+
 /* helaian bawah (tapisan di telefon) */
 dialog.sheet {
   position: fixed;
@@ -313,8 +336,10 @@ kbd {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
-.rise { animation: rise 0.45s var(--ease-out-soft) both; }
-.page { animation: rise 0.4s var(--ease-out-soft) both; }
+/* "backwards", bukan "both": selepas tamat, tiada transform yang tinggal,
+   supaya elemen position: fixed di dalamnya kekal terikat pada skrin */
+.rise { animation: rise 0.45s var(--ease-out-soft) backwards; }
+.page { animation: rise 0.4s var(--ease-out-soft) backwards; }
 .d1 { animation-delay: 0.06s; }
 .d2 { animation-delay: 0.12s; }
 .d3 { animation-delay: 0.18s; }

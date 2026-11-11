@@ -38,7 +38,7 @@ export default function Kuiz() {
 
   if (!qs)
     return (
-      <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
+      <div className="mx-auto max-w-2xl pt-6 sm:pt-14">
         <PageTitle kicker="Uji diri" title="Kuiz" sub="Uji kefahaman anda. Soalan dipilih secara rawak daripada kamus." />
         <div className="space-y-6 folio p-5 sm:p-6">
           <Chips
@@ -76,7 +76,7 @@ export default function Kuiz() {
     const wrong = qs.filter((q) => q.picked !== q.answer)
     const record = best[`${mode}-${total}`] ?? 0
     return (
-      <div className="rise mx-auto max-w-2xl pt-10 sm:pt-14">
+      <div className="rise mx-auto max-w-2xl pt-6 sm:pt-14">
         <div className="ornate px-6 py-12 text-center">
           <p className="rubric">Keputusan</p>
           <p className="mt-3 font-serif text-5xl font-bold text-brand">
@@ -132,7 +132,7 @@ export default function Kuiz() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
+    <div className="mx-auto max-w-2xl pt-6 sm:pt-14">
       <div className="mb-4 flex items-center gap-3">
         <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-full text-soft hover:bg-tint">
           <Icon name="x" />
@@ -146,20 +146,20 @@ export default function Kuiz() {
       </div>
 
       <div key={pos} className="rise">
-        <div className="ornate p-6 sm:p-8">
+        <div className="ornate p-5 sm:p-8">
           <p className="rubric">
             {q.kind === 'istilah' ? 'Apakah istilah bagi maksud ini?' : 'Apakah maksud istilah ini?'}
           </p>
           {q.kind === 'istilah' ? (
-            <p className="mt-4 font-serif text-xl leading-relaxed sm:text-2xl">
+            <p className="mt-3 font-serif text-[1.15rem] leading-relaxed sm:mt-4 sm:text-2xl">
               <Rich runs={q.answer.defs[0]} />
             </p>
           ) : (
-            <p className="mt-3 font-serif text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{q.answer.term}</p>
+            <p className="mt-3 font-serif text-3xl leading-tight font-semibold tracking-tight sm:text-5xl">{q.answer.term}</p>
           )}
         </div>
 
-        <div className="mt-4 grid gap-2.5">
+        <div className="mt-4 grid gap-2.5 pb-24 lg:pb-0">
           {q.options.map((o, n) => {
             const right = answered && o === q.answer
             const wrong = answered && o === q.picked && o !== q.answer
@@ -194,13 +194,20 @@ export default function Kuiz() {
           })}
         </div>
 
-        <div className="mt-5 flex min-h-13 items-center justify-between gap-4" aria-live="polite">
+        <div
+          aria-live="polite"
+          className={`flex items-center justify-between gap-4 lg:static lg:mt-5 lg:min-h-13 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${
+            answered
+              ? 'rise fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-30 border-t border-line bg-paper/95 px-5 py-3 shadow-[0_-10px_30px_-18px_rgb(16_28_44/0.45)] backdrop-blur-md'
+              : ''
+          }`}
+        >
           {answered && (
             <>
               <p className={`font-semibold ${q.picked === q.answer ? 'text-ok' : 'text-bad'}`}>
                 {q.picked === q.answer ? 'Betul!' : 'Kurang tepat.'}
               </p>
-              <button type="button" ref={(el) => el?.focus({ preventScroll: true })} onClick={() => setPos(pos + 1)} className={btnPrimary}>
+              <button type="button" ref={(el) => el?.focus({ preventScroll: true })} onClick={() => setPos(pos + 1)} className={`${btnPrimary} min-h-12`}>
                 {pos === total - 1 ? 'Lihat keputusan' : 'Seterusnya'} <Icon name="right" className="size-4" />
               </button>
             </>

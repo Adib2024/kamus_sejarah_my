@@ -5,7 +5,7 @@ import { DOC_LINKS } from './Dasar'
 export default function Tentang() {
   const card = 'folio p-5 sm:p-6'
   return (
-    <div className="mx-auto max-w-3xl pt-10 sm:pt-14">
+    <div className="mx-auto max-w-3xl pt-6 sm:pt-14">
       <PageTitle kicker="Tentang" title="Kamus Sejarah MY" sub="Kamus istilah Sejarah untuk guru dan pelajar." />
       <div className="space-y-4">
         <section className={card}>
@@ -15,12 +15,12 @@ export default function Tentang() {
             <em>MY DIC AH (My History Dictionary)</em>. Gunakan carian untuk mencari istilah dengan pantas, dan ulang kaji
             melalui Flashcard serta Kuiz.
           </p>
-          <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-[14px] bg-tint p-5">
+          <dl className="mt-5 grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="rounded-[14px] bg-tint p-4 sm:p-5">
               <dt className="text-xs font-bold tracking-wider text-soft uppercase">Penulis</dt>
               <dd className="mt-1 font-serif text-lg font-semibold">Cg Surina</dd>
             </div>
-            <div className="rounded-[14px] bg-tint p-5">
+            <div className="rounded-[14px] bg-tint p-4 sm:p-5">
               <dt className="text-xs font-bold tracking-wider text-soft uppercase">Dibangunkan oleh</dt>
               <dd className="mt-1 font-serif text-lg font-semibold">Adib</dd>
             </div>
