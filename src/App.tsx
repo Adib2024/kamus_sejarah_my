@@ -6,6 +6,7 @@ import Istilah from './pages/Istilah'
 import Flashcard from './pages/Flashcard'
 import Kuiz from './pages/Kuiz'
 import Tentang from './pages/Tentang'
+import Dasar, { DOC_LINKS, DOCS } from './pages/Dasar'
 
 type Tema = 'sistem' | 'cerah' | 'gelap'
 const TEMA: { id: Tema; icon: string; label: string }[] = [
@@ -51,7 +52,7 @@ export default function App() {
   }, [route])
 
   const section = route.split('/')[0]
-  const current = section === 'istilah' ? '' : section
+  const current = section === 'istilah' ? '' : section in DOCS ? 'tentang' : section
   const t = TEMA.find((x) => x.id === tema) ?? TEMA[0]
   const nextTema = TEMA[(TEMA.indexOf(t) + 1) % TEMA.length]
   const tool = 'grid size-10 place-items-center rounded-lg opacity-85 hover:bg-white/10 hover:opacity-100'
@@ -116,14 +117,25 @@ export default function App() {
         {section === 'flashcard' && <Flashcard />}
         {section === 'kuiz' && <Kuiz />}
         {section === 'tentang' && <Tentang />}
-        {!['', 'istilah', 'flashcard', 'kuiz', 'tentang'].includes(section) && (
+        {section in DOCS && <Dasar id={section} />}
+        {!['', 'istilah', 'flashcard', 'kuiz', 'tentang'].includes(section) && !(section in DOCS) && (
           <p className="py-16 text-center text-soft">
             Halaman tidak ditemui. <a href="#/" className="font-semibold text-brand underline">Kembali ke kamus</a>
           </p>
         )}
         <footer className="mt-14 border-t border-line pt-5 text-center text-sm text-soft">
-          Penulis: <span className="font-semibold text-ink">Cg Surina</span> · Dibangunkan oleh{' '}
-          <span className="font-semibold text-ink">Adib</span>
+          <nav aria-label="Dasar dan terma" className="flex flex-wrap justify-center gap-x-5 gap-y-1">
+            {DOC_LINKS.map((d) => (
+              <a key={d.path} href={`#/${d.path}`} className="inline-flex min-h-9 items-center font-semibold text-ink hover:text-brand hover:underline">
+                {d.label}
+              </a>
+            ))}
+          </nav>
+          <p className="mt-3">
+            Penulis: <span className="font-semibold text-ink">Cg Surina</span> · Dibangunkan oleh{' '}
+            <span className="font-semibold text-ink">Adib</span>
+          </p>
+          <p className="mt-1">© {new Date().getFullYear()} Kamus Sejarah MY. Semua hak terpelihara.</p>
         </footer>
       </main>
 
