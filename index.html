@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Kamus Sejarah MY — lebih 600 istilah Sejarah untuk guru dan pelajar, dengan carian pantas, flashcard dan kuiz." />
+    <meta name="theme-color" content="#1f3a5f" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <title>Kamus Sejarah MY</title>
+    <script>
+      // elak "flash" tema/saiz tulisan sebelum app dimuat
+      try {
+        var t = JSON.parse(localStorage.getItem('ksm:tema') || '"sistem"')
+        var d = t === 'gelap' || (t === 'sistem' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.toggle('dark', d)
+        document.documentElement.dataset.fs = JSON.parse(localStorage.getItem('ksm:saiz') || '0')
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
