@@ -102,7 +102,7 @@ export default function Kuiz() {
             <div className="space-y-2.5">
               {wrong.map((q) => (
                 <article key={q.answer.id} className="folio p-4">
-                  <h3 className="font-serif text-lg font-semibold text-brand">{q.answer.term}</h3>
+                  <h3 className="font-extrabold tracking-tight">{q.answer.term}</h3>
                   <div className="mt-1 leading-relaxed">
                     <Defs defs={q.answer.defs} />
                   </div>
@@ -134,7 +134,7 @@ export default function Kuiz() {
   return (
     <div className="pt-6">
       <div className="mb-4 flex items-center gap-3">
-        <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-md text-soft hover:bg-tint">
+        <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-xl text-soft hover:bg-tint">
           <Icon name="x" />
         </button>
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={pos} aria-label="Kemajuan">
@@ -146,16 +146,16 @@ export default function Kuiz() {
       </div>
 
       <div key={pos} className="rise">
-        <div className="ornate px-8 py-8 text-center">
+        <div className="ornate p-6">
           <p className="rubric">
             {q.kind === 'istilah' ? 'Apakah istilah bagi maksud ini?' : 'Apakah maksud istilah ini?'}
           </p>
           {q.kind === 'istilah' ? (
-            <p className="mt-3 text-lg leading-relaxed sm:text-xl">
+            <p className="mt-3 text-lg leading-relaxed">
               <Rich runs={q.answer.defs[0]} />
             </p>
           ) : (
-            <p className="mt-3 font-serif text-2xl leading-tight font-bold tracking-wide text-brand sm:text-3xl">{q.answer.term}</p>
+            <p className="mt-3 font-serif text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{q.answer.term}</p>
           )}
         </div>
 
@@ -169,7 +169,7 @@ export default function Kuiz() {
                 type="button"
                 disabled={answered}
                 onClick={() => pick(o)}
-                className={`flex min-h-14 items-center gap-3 rounded-lg border px-4 py-3 text-left text-[1.05rem] transition disabled:cursor-default ${
+                className={`flex min-h-14 items-center gap-3 rounded-2xl border px-4 py-3 text-left transition disabled:cursor-default ${
                   right
                     ? 'border-ok bg-ok/10'
                     : wrong
@@ -180,13 +180,13 @@ export default function Kuiz() {
                 }`}
               >
                 <span
-                  className={`grid size-9 shrink-0 place-items-center rounded-full border border-gold/50 font-serif text-sm font-bold ${
+                  className={`grid size-9 shrink-0 place-items-center rounded-full text-sm font-bold ${
                     right ? 'bg-ok text-paper' : wrong ? 'bg-bad text-paper' : 'bg-tint text-brand'
                   }`}
                 >
                   {right ? <Icon name="check" className="size-4" /> : wrong ? <Icon name="x" className="size-4" /> : 'ABCD'[n]}
                 </span>
-                <span className={q.kind === 'istilah' ? 'font-serif font-bold tracking-wide' : 'leading-snug'}>
+                <span className={q.kind === 'istilah' ? 'font-extrabold tracking-tight' : 'leading-snug'}>
                   {q.kind === 'istilah' ? o.term : <Rich runs={o.defs[0]} />}
                 </span>
               </button>

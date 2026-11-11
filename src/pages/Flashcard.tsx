@@ -70,7 +70,7 @@ export default function Flashcard() {
               id="fc-huruf"
               value={letter}
               onChange={(ev) => setLetter(ev.target.value)}
-              className="h-11 w-full rounded-md border border-line bg-card px-3 sm:w-64"
+              className="h-11 w-full rounded-xl border border-line bg-card px-3 sm:w-64"
             >
               <option value="">Semua huruf ({entries.length} istilah)</option>
               {LETTERS.filter((l) => letterCount[l]).map((l) => (
@@ -123,7 +123,7 @@ export default function Flashcard() {
   return (
     <div className="pt-6">
       <div className="mb-4 flex items-center gap-3">
-        <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-md text-soft hover:bg-tint">
+        <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-xl text-soft hover:bg-tint">
           <Icon name="x" />
         </button>
         <div
@@ -149,9 +149,9 @@ export default function Flashcard() {
         className="flip rise block w-full text-left"
       >
         <div className={`flip-inner ${s.flipped ? 'is-flipped' : ''}`}>
-          <div className="flip-face ornate flex min-h-80 flex-col items-center justify-center p-8 text-center">
+          <div className="flip-face folio flex min-h-80 flex-col items-center justify-center !rounded-3xl p-8 text-center shadow-sm">
             <p className="rubric">Istilah</p>
-            <p className="mt-4 font-serif text-3xl leading-tight font-bold tracking-wide text-brand sm:text-4xl">{card.term}</p>
+            <p className="mt-4 font-serif text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{card.term}</p>
             <p className="mt-6 text-sm text-soft">Ketik untuk lihat maksud</p>
           </div>
           <div

@@ -3,38 +3,30 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: "Cinzel Decorative";
+  font-family: "Fraunces Variable";
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("@fontsource/cinzel-decorative/files/cinzel-decorative-latin-700-normal.woff2") format("woff2");
+  src: url("@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Cinzel Variable";
+  font-family: "Plus Jakarta Sans Variable";
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 200 800;
   font-display: swap;
-  src: url("@fontsource-variable/cinzel/files/cinzel-latin-wght-normal.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Source Serif 4 Variable";
-  font-style: normal;
-  font-weight: 200 900;
-  font-display: swap;
-  src: url("@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2") format("woff2-variations");
-}
-@font-face {
-  font-family: "Source Serif 4 Variable";
+  font-family: "Plus Jakarta Sans Variable";
   font-style: italic;
-  font-weight: 200 900;
+  font-weight: 200 800;
   font-display: swap;
-  src: url("@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-italic.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-italic.woff2") format("woff2-variations");
 }
 
 @theme inline {
-  --font-sans: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
-  --font-serif: "Cinzel Variable", "Source Serif 4 Variable", Georgia, serif;
-  --font-display: "Cinzel Decorative", "Cinzel Variable", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --color-paper: var(--paper);
   --color-card: var(--card);
   --color-ink: var(--ink);
@@ -43,6 +35,9 @@
   --color-brand: var(--brand);
   --color-on-brand: var(--on-brand);
   --color-bar: var(--bar);
+  --color-bar-ink: var(--bar-ink);
+  --color-chip: var(--chip);
+  --color-on-chip: var(--on-chip);
   --color-gold: var(--gold);
   --color-tint: var(--tint);
   --color-ok: var(--ok);
@@ -50,37 +45,52 @@
   --color-hl: var(--hl);
 }
 
+/* Tema cerah "Warisan": hijau zamrud + emas */
 :root {
-  /* krim lembut, dakwat gelap, merah hati dan emas sebagai aksen */
-  --paper: #faf7f1;
+  --paper: #f3f6f4;
   --card: #ffffff;
-  --ink: #221a13;
-  --soft: #6b6052;
-  --line: #e7dfd0;
-  --brand: #7a2222;
+  --ink: #12332b;
+  --soft: #5a6f69;
+  --line: #dfe7e4;
+  --brand: #0e5a4a;
   --on-brand: #ffffff;
-  --bar: #6a1717;
-  --gold: #8a6410;
-  --tint: #f5efe2;
-  --ok: #2f6b3a;
-  --bad: #a3271d;
-  --hl: #f6e2a0;
+  --bar: #0e5a4a;
+  --bar-ink: #ffffff;
+  --bar-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 2l18 18-18 18L2 20z' fill='none' stroke='%23fff' stroke-opacity='.13'/%3E%3Cpath d='M20 12l8 8-8 8-8-8z' fill='%23fff' fill-opacity='.08'/%3E%3C/svg%3E");
+  --chip: #ffffff;
+  --on-chip: #0e5a4a;
+  --gold: #946a00;
+  --badge: #c8940f;
+  --feature: #fff7e0;
+  --feature-line: #ecd58c;
+  --tint: #dcefe9;
+  --ok: #17794f;
+  --bad: #b3362b;
+  --hl: #fde68a;
   color-scheme: light;
 }
+/* Tema gelap "Muzium": arang + emas */
 .dark {
-  --paper: #14110d;
-  --card: #1d1914;
-  --ink: #ece6da;
-  --soft: #a89d8b;
-  --line: #332b20;
-  --brand: #e3b873;
-  --on-brand: #1a140c;
-  --bar: #2a1212;
-  --gold: #d0a04a;
-  --tint: #272018;
-  --ok: #86cb9d;
-  --bad: #f0937f;
-  --hl: #5f4810;
+  --paper: #0f1115;
+  --card: #171a20;
+  --ink: #e9e6df;
+  --soft: #9a958a;
+  --line: #272b34;
+  --brand: #c9a55a;
+  --on-brand: #0f1115;
+  --bar: #0f1115;
+  --bar-ink: #e9e6df;
+  --bar-pattern: none;
+  --chip: #c9a55a;
+  --on-chip: #0f1115;
+  --gold: #c9a55a;
+  --badge: #c9a55a;
+  --feature: #0f1115;
+  --feature-line: #c9a55a;
+  --tint: #20242c;
+  --ok: #6fcf9a;
+  --bad: #f08a7f;
+  --hl: #5a4712;
   color-scheme: dark;
 }
 
@@ -95,8 +105,8 @@ html[data-fs="2"] { font-size: 125%; }
 body {
   background: var(--paper);
   color: var(--ink);
-  font-variant-numeric: lining-nums;
   overflow-wrap: anywhere;
+  overflow-x: clip;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -114,7 +124,7 @@ mark {
 }
 
 /* senarai panjang: pelayar hanya lukis kad yang kelihatan */
-.entry { content-visibility: auto; contain-intrinsic-size: auto 110px; }
+.entry { content-visibility: auto; contain-intrinsic-size: auto 100px; }
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -148,35 +158,49 @@ mark {
 
 /* ---------- gaya ---------- */
 
+/* jalur atas: pengepala, tajuk dan carian berkongsi satu latar */
+.bar {
+  background: var(--bar) var(--bar-pattern) fixed;
+  color: var(--bar-ink);
+}
+/* lebar penuh skrin, kandungan kekal sejajar dengan lajur utama */
+.bleed {
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+}
+
 /* kad istilah */
 .folio {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 16px;
 }
 
-/* panel utama: garis emas di atas */
+/* panel utama */
 .ornate {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-top: 3px solid #b08a2e;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgb(60 35 10 / 0.06);
+  background: var(--feature);
+  border: 1px solid var(--feature-line);
+  border-radius: 20px;
 }
 
-/* garis emas di bawah pengepala */
-.songket {
-  height: 3px;
-  background: #b08a2e;
-}
-
-/* label kecil */
+/* lencana kecil */
 .rubric {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--on-brand);
+  background: var(--badge);
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+}
+.dark .rubric {
+  background: none;
   color: var(--gold);
+  padding: 0;
+  letter-spacing: 0.22em;
+  font-weight: 600;
 }
 
 kbd {
