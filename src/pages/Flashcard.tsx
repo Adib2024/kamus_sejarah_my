@@ -48,8 +48,8 @@ export default function Flashcard() {
 
   if (!s)
     return (
-      <div className="pt-6">
-        <PageTitle title="Flashcard" sub="Lihat istilah, cuba ingat maksudnya, kemudian ketik kad untuk semak." />
+      <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
+        <PageTitle kicker="Ulang kaji" title="Flashcard" sub="Lihat istilah, cuba ingat maksudnya, kemudian ketik kad untuk semak." />
         <div className="space-y-6 folio p-5 sm:p-6">
           <Chips
             label="Bilangan kad"
@@ -70,7 +70,7 @@ export default function Flashcard() {
               id="fc-huruf"
               value={letter}
               onChange={(ev) => setLetter(ev.target.value)}
-              className="h-11 w-full rounded-xl border border-line bg-card px-3 sm:w-64"
+              className="h-11 w-full rounded-full border border-line bg-card px-4 text-sm font-semibold sm:w-72"
             >
               <option value="">Semua huruf ({entries.length} istilah)</option>
               {LETTERS.filter((l) => letterCount[l]).map((l) => (
@@ -90,7 +90,7 @@ export default function Flashcard() {
   const total = s.deck.length
   if (!active)
     return (
-      <div className="rise pt-6 text-center">
+      <div className="rise mx-auto max-w-2xl pt-10 text-center sm:pt-14">
         <div className="ornate px-6 py-12">
           <p className="rubric">Selesai</p>
           <p className="mt-3 font-serif text-5xl font-bold text-brand">
@@ -121,9 +121,9 @@ export default function Flashcard() {
 
   const card = s.deck[s.pos]
   return (
-    <div className="pt-6">
+    <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
       <div className="mb-4 flex items-center gap-3">
-        <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-xl text-soft hover:bg-tint">
+        <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-full text-soft hover:bg-tint">
           <Icon name="x" />
         </button>
         <div
@@ -149,17 +149,17 @@ export default function Flashcard() {
         className="flip rise block w-full text-left"
       >
         <div className={`flip-inner ${s.flipped ? 'is-flipped' : ''}`}>
-          <div className="flip-face folio flex min-h-80 flex-col items-center justify-center !rounded-3xl p-8 text-center shadow-sm">
+          <div className="flip-face folio flex min-h-96 flex-col items-center justify-center !rounded-[22px] p-8 text-center shadow-xl shadow-[#101c2c]/10">
             <p className="rubric">Istilah</p>
-            <p className="mt-4 font-serif text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{card.term}</p>
+            <p className="mt-4 font-serif text-4xl leading-tight font-semibold tracking-tight text-brand sm:text-5xl">{card.term}</p>
             <p className="mt-6 text-sm text-soft">Ketik untuk lihat maksud</p>
           </div>
           <div
             aria-hidden={!s.flipped}
-            className="flip-face flip-back ornate flex min-h-80 flex-col justify-center px-9 py-10 text-center"
+            className="flip-face flip-back ornate flex min-h-96 flex-col justify-center !rounded-[22px] px-8 py-10 text-center"
           >
             <p className="rubric">{card.term}</p>
-            <div className="mt-4 text-xl leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
+            <div className="mt-5 font-serif text-xl leading-relaxed sm:text-2xl [&_ol]:inline-block [&_ol]:text-left">
               <Defs defs={card.defs} />
             </div>
           </div>
