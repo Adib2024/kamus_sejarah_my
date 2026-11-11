@@ -96,3 +96,47 @@ export function dailyIndex(n: number, date = new Date()) {
   const day = Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000)
   return (Math.imul(day, 2654435761) >>> 0) % n
 }
+
+/* ---------- baru diteroka (disimpan dalam peranti sahaja) ---------- */
+const RECENT = 'terkini'
+const recentSubs = new Set<() => void>()
+let recentCache: string[] | null = null
+const readRecent = () => (recentCache ??= load<string[]>(RECENT, []))
+export function pushRecent(id: string) {
+  recentCache = [id, ...readRecent().filter((x) => x !== id)].slice(0, 8)
+  save(RECENT, recentCache)
+  recentSubs.forEach((f) => f())
+}
+export function clearRecent() {
+  recentCache = []
+  save(RECENT, recentCache)
+  recentSubs.forEach((f) => f())
+}
+export const useRecent = () =>
+  useSyncExternalStore((cb) => {
+    recentSubs.add(cb)
+    return () => recentSubs.delete(cb)
+  }, readRecent)
+
+/** tambah kelas "in" apabila elemen masuk ke paparan (animasi dedah) */
+export function useReveal<T extends HTMLElement>() {
+  const [el, setEl] = useState<T | null>(null)
+  useEffect(() => {
+    if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      el.classList.add('in')
+      return
+    }
+    const io = new IntersectionObserver(
+      (items) => items.forEach((i) => i.isIntersecting && (i.target.classList.add('in'), io.unobserve(i.target))),
+      { rootMargin: '0px 0px -8% 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [el])
+  return setEl
+}
+
+export const go = (path: string) => {
+  location.hash = `#/${path}`
+}

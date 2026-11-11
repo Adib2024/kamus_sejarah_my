@@ -34,6 +34,7 @@ export const DOCS: Record<string, Doc> = {
             <ul className={`${ul} mt-2`}>
               <li>pilihan tema (cerah atau gelap) dan saiz tulisan;</li>
               <li>tetapan Flashcard dan Kuiz, serta markah terbaik Kuiz;</li>
+              <li>senarai istilah yang baru anda buka (bahagian “Baru diteroka”), yang boleh dikosongkan di halaman utama;</li>
               <li>salinan app dan data kamus, supaya ia boleh dibuka tanpa Internet.</li>
             </ul>
             <p className="mt-2">
@@ -195,15 +196,15 @@ export const DOC_LINKS = [
 export default function Dasar({ id }: { id: string }) {
   const doc = DOCS[id]
   return (
-    <div className="pt-6">
-      <a href="#/tentang" className="mb-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-brand hover:underline">
+    <div className="mx-auto max-w-3xl pt-8 sm:pt-12">
+      <a href="#/tentang" className="mb-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-gold hover:underline">
         <Icon name="left" className="size-4" /> Tentang
       </a>
-      <PageTitle title={doc.title} sub={doc.sub} />
+      <PageTitle kicker="Dasar" title={doc.title} sub={doc.sub} />
       <div className="folio divide-y divide-line">
         {doc.sections.map((s, n) => (
           <section key={s.h} className="p-5 sm:p-6">
-            <h2 className="flex items-baseline gap-2.5 font-serif text-xl font-bold tracking-tight">
+            <h2 className="flex items-baseline gap-2.5 font-serif text-2xl font-semibold tracking-tight">
               <span className="text-sm font-bold text-gold tabular-nums">{n + 1}</span>
               {s.h}
             </h2>

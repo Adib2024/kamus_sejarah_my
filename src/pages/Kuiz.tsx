@@ -38,8 +38,8 @@ export default function Kuiz() {
 
   if (!qs)
     return (
-      <div className="pt-6">
-        <PageTitle title="Kuiz" sub="Uji kefahaman anda. Soalan dipilih secara rawak daripada kamus." />
+      <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
+        <PageTitle kicker="Uji diri" title="Kuiz" sub="Uji kefahaman anda. Soalan dipilih secara rawak daripada kamus." />
         <div className="space-y-6 folio p-5 sm:p-6">
           <Chips
             label="Bilangan soalan"
@@ -76,7 +76,7 @@ export default function Kuiz() {
     const wrong = qs.filter((q) => q.picked !== q.answer)
     const record = best[`${mode}-${total}`] ?? 0
     return (
-      <div className="rise pt-6">
+      <div className="rise mx-auto max-w-2xl pt-10 sm:pt-14">
         <div className="ornate px-6 py-12 text-center">
           <p className="rubric">Keputusan</p>
           <p className="mt-3 font-serif text-5xl font-bold text-brand">
@@ -132,9 +132,9 @@ export default function Kuiz() {
   }
 
   return (
-    <div className="pt-6">
+    <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
       <div className="mb-4 flex items-center gap-3">
-        <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-xl text-soft hover:bg-tint">
+        <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-full text-soft hover:bg-tint">
           <Icon name="x" />
         </button>
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={pos} aria-label="Kemajuan">
@@ -146,16 +146,16 @@ export default function Kuiz() {
       </div>
 
       <div key={pos} className="rise">
-        <div className="ornate p-6">
+        <div className="ornate p-6 sm:p-8">
           <p className="rubric">
             {q.kind === 'istilah' ? 'Apakah istilah bagi maksud ini?' : 'Apakah maksud istilah ini?'}
           </p>
           {q.kind === 'istilah' ? (
-            <p className="mt-3 text-lg leading-relaxed">
+            <p className="mt-4 font-serif text-xl leading-relaxed sm:text-2xl">
               <Rich runs={q.answer.defs[0]} />
             </p>
           ) : (
-            <p className="mt-3 font-serif text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{q.answer.term}</p>
+            <p className="mt-3 font-serif text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{q.answer.term}</p>
           )}
         </div>
 
@@ -169,14 +169,14 @@ export default function Kuiz() {
                 type="button"
                 disabled={answered}
                 onClick={() => pick(o)}
-                className={`flex min-h-14 items-center gap-3 rounded-2xl border px-4 py-3 text-left transition disabled:cursor-default ${
+                className={`flex min-h-14 items-center gap-3 rounded-[14px] border px-4 py-3.5 text-left transition duration-200 disabled:cursor-default ${
                   right
                     ? 'border-ok bg-ok/10'
                     : wrong
                       ? 'border-bad bg-bad/10'
                       : answered
                         ? 'border-line bg-card opacity-55'
-                        : 'border-line bg-card hover:border-brand hover:bg-tint'
+                        : 'border-line bg-card hover:-translate-y-0.5 hover:border-gilt hover:shadow-md'
                 }`}
               >
                 <span

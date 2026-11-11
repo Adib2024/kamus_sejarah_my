@@ -7,12 +7,14 @@ Kamus istilah Sejarah untuk guru dan pelajar — web app (PWA) yang boleh dipasa
 
 ## Ciri
 
-- Carian segera pada istilah dan maksud, bertolak ansur dengan salah eja
-- Tapis ikut huruf A–Z
-- Istilah Hari Ini
+- Halaman utama dengan carian, Istilah Hari Ini, istilah pilihan, tema, istilah paling kerap dirujuk dan "Baru diteroka"
+- Kamus: carian segera pada istilah dan maksud (bertolak ansur dengan salah eja), tapisan tema dan huruf A–Z
+- Halaman istilah: definisi, tahun yang disebut, tema, zaman dan istilah berkaitan
 - Flashcard dan Kuiz untuk ulang kaji
 - Tema cerah/gelap, saiz tulisan boleh laras
 - Boleh dipasang (Add to Home Screen) dan berfungsi offline
+
+Tema, zaman dan istilah berkaitan dijana secara automatik dalam `src/lib/data.ts` daripada kata kunci dan tahun dalam teks, kerana fail Excel hanya mengandungi istilah dan maksud.
 
 ## Kemas kini data kamus
 

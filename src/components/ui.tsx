@@ -60,6 +60,14 @@ const paths: Record<string, ReactNode> = {
   right: <path d="M9 5l7 7-7 7" />,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   refresh: <path d="M20 11a8 8 0 0 0-14.5-4M4 4v3.5h3.5M4 13a8 8 0 0 0 14.5 4M20 20v-3.5h-3.5" />,
+  home: <path d="M4 11.5 12 4l8 7.5V20h-5.5v-5.5h-5V20H4z" />,
+  arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3.5 2" />
+    </>
+  ),
   star: <path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z" />,
 }
 
@@ -120,9 +128,9 @@ export function Defs({ defs, hl }: { defs: Run[][]; hl?: RegExp | null }) {
 }
 
 export const btn =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition active:scale-[0.98] disabled:opacity-40'
-export const btnPrimary = `${btn} bg-brand text-on-brand hover:opacity-90`
-export const btnGhost = `${btn} border border-line bg-card text-ink hover:bg-tint`
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold transition duration-200 active:scale-[0.98] disabled:opacity-40'
+export const btnPrimary = `${btn} btn-primary bg-brand text-on-brand hover:opacity-90`
+export const btnGhost = `${btn} btn-ghost border border-line bg-card text-ink hover:border-gilt hover:bg-tint`
 
 export function Chips<T extends string | number>({
   label,
@@ -145,7 +153,7 @@ export function Chips<T extends string | number>({
             type="button"
             aria-pressed={o.value === value}
             onClick={() => onChange(o.value)}
-            className={`min-h-11 rounded-xl border px-4 text-sm font-semibold transition ${
+            className={`min-h-11 rounded-full border px-5 text-sm font-semibold transition duration-200 ${
               o.value === value
                 ? 'border-brand bg-brand text-on-brand'
                 : 'border-line bg-card text-ink hover:bg-tint'
@@ -159,11 +167,12 @@ export function Chips<T extends string | number>({
   )
 }
 
-export function PageTitle({ title, sub }: { title: string; sub: string }) {
+export function PageTitle({ title, sub, kicker }: { title: string; sub: string; kicker?: string }) {
   return (
-    <header className="mb-6">
-      <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
-      <p className="mt-1.5 text-soft">{sub}</p>
+    <header className="mb-8">
+      {kicker && <p className="rubric rise">{kicker}</p>}
+      <h1 className="rise d1 mt-3 font-serif text-4xl leading-[1.05] font-semibold tracking-tight sm:text-5xl">{title}</h1>
+      <p className="rise d2 mt-3 max-w-xl text-lg text-soft">{sub}</p>
     </header>
   )
 }
