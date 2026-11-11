@@ -1,5 +1,6 @@
 import { entries } from '../lib/data'
-import { PageTitle } from '../components/ui'
+import { Icon, PageTitle } from '../components/ui'
+import { DOC_LINKS } from './Dasar'
 
 export default function Tentang() {
   const card = 'folio p-5 sm:p-6'
@@ -51,6 +52,21 @@ export default function Tentang() {
             <li>Ketik nama istilah untuk membuka halamannya, kemudian kongsi pautan itu kepada rakan atau pelajar.</li>
             <li>Tukar saiz tulisan dan tema cerah/gelap melalui butang di penjuru atas.</li>
           </ul>
+        </section>
+
+        <section className={card}>
+          <h2 className="font-serif text-xl font-semibold">Dasar dan terma</h2>
+          <ul className="mt-3 divide-y divide-line">
+            {DOC_LINKS.map((d) => (
+              <li key={d.path}>
+                <a href={`#/${d.path}`} className="flex min-h-12 items-center justify-between gap-3 font-semibold hover:text-brand">
+                  {d.label}
+                  <Icon name="right" className="size-4 text-soft" />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-sm text-soft">Versi 1.0</p>
         </section>
       </div>
     </div>
