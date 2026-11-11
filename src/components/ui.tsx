@@ -60,6 +60,7 @@ const paths: Record<string, ReactNode> = {
   right: <path d="M9 5l7 7-7 7" />,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   refresh: <path d="M20 11a8 8 0 0 0-14.5-4M4 4v3.5h3.5M4 13a8 8 0 0 0 14.5 4M20 20v-3.5h-3.5" />,
+  filter: <path d="M4 6h16M7 12h10M10 18h4" />,
   home: <path d="M4 11.5 12 4l8 7.5V20h-5.5v-5.5h-5V20H4z" />,
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
   clock: (
