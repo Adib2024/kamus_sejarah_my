@@ -17,14 +17,15 @@ export function Badges({ e }: { e: Entry }) {
 export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: RegExp | null }) {
   const act = 'relative z-10 grid size-9 place-items-center rounded-full text-soft transition hover:bg-tint hover:text-ink'
   return (
-    <article className="entry folio flex h-full flex-col p-5">
+    <article className="entry folio flex h-full flex-col p-4 sm:p-5">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-xl leading-snug font-semibold tracking-tight text-brand">
+        <h3 className="font-serif text-lg leading-snug font-semibold tracking-tight text-brand sm:text-xl">
           <a href={`#/istilah/${e.id}`} className="outline-none after:absolute after:inset-0 after:rounded-[14px] focus-visible:after:outline-2 focus-visible:after:outline-gilt">
             <Marked text={e.term} hl={hl} />
           </a>
         </h3>
-        <div className="-mt-1 -mr-2 flex shrink-0">
+        <Icon name="right" className="mt-1 size-4 shrink-0 text-gilt sm:hidden" />
+        <div className="-mt-1 -mr-2 hidden shrink-0 sm:flex">
           <button type="button" aria-label={`Salin ${e.term}`} title="Salin" onClick={() => copyText(entryText(e))} className={act}>
             <Icon name="copy" className="size-[17px]" />
           </button>
@@ -33,10 +34,10 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
           </button>
         </div>
       </div>
-      <div className="mt-2 leading-relaxed text-ink/85">
+      <div className="mt-1.5 leading-relaxed text-ink/85 sm:mt-2">
         <Defs defs={e.defs} hl={hl} />
       </div>
-      <div className="mt-auto pt-4 empty:hidden">
+      <div className="mt-auto pt-3 empty:hidden sm:pt-4">
         <Badges e={e} />
       </div>
     </article>
