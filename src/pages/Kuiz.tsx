@@ -79,7 +79,7 @@ export default function Kuiz() {
       <div className="rise pt-6">
         <div className="ornate px-6 py-12 text-center">
           <p className="rubric">Keputusan</p>
-          <p className="mt-3 font-serif text-6xl font-semibold text-brand">
+          <p className="mt-3 font-serif text-5xl font-bold text-brand">
             {score}
             <span className="text-2xl text-soft"> / {total}</span>
           </p>
@@ -155,7 +155,7 @@ export default function Kuiz() {
               <Rich runs={q.answer.defs[0]} />
             </p>
           ) : (
-            <p className="mt-3 font-serif text-3xl leading-tight font-bold tracking-wide text-brand sm:text-4xl">{q.answer.term}</p>
+            <p className="mt-3 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">{q.answer.term}</p>
           )}
         </div>
 
@@ -180,13 +180,13 @@ export default function Kuiz() {
                 }`}
               >
                 <span
-                  className={`grid size-9 shrink-0 place-items-center rounded-full border border-gold/50 font-serif text-lg font-bold ${
+                  className={`grid size-9 shrink-0 place-items-center rounded-full border border-gold/50 font-serif text-sm font-bold ${
                     right ? 'bg-ok text-paper' : wrong ? 'bg-bad text-paper' : 'bg-tint text-brand'
                   }`}
                 >
                   {right ? <Icon name="check" className="size-4" /> : wrong ? <Icon name="x" className="size-4" /> : 'ABCD'[n]}
                 </span>
-                <span className={q.kind === 'istilah' ? 'font-serif text-xl font-bold tracking-wide' : 'leading-snug'}>
+                <span className={q.kind === 'istilah' ? 'font-serif text-base font-bold' : 'leading-snug'}>
                   {q.kind === 'istilah' ? o.term : <Rich runs={o.defs[0]} />}
                 </span>
               </button>

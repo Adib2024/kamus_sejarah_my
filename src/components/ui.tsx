@@ -173,7 +173,7 @@ export function Chips<T extends string | number>({
 export function PageTitle({ title, sub }: { title: string; sub: string }) {
   return (
     <header className="mb-6 text-center">
-      <h1 className="font-serif text-4xl font-bold tracking-wide text-brand">{title}</h1>
+      <h1 className="font-serif text-2xl font-bold text-brand sm:text-3xl">{title}</h1>
       <Flourish className="mt-2" />
       <p className="mx-auto mt-2 max-w-md text-soft">{sub}</p>
     </header>

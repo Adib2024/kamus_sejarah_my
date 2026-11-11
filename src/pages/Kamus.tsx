@@ -8,7 +8,7 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
   return (
     <article className="entry folio px-5 py-4">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-[1.35rem] leading-snug font-bold tracking-wide text-brand">
+        <h3 className="font-serif text-[1.05rem] leading-snug font-bold text-brand">
           <a href={`#/istilah/${e.id}`} className="hover:underline">
             <Marked text={e.term} hl={hl} />
           </a>
@@ -34,7 +34,7 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
           </button>
         </div>
       </div>
-      <div className="mt-1 leading-relaxed text-ink/90">
+      <div className="mt-1.5 leading-relaxed text-ink/90">
         <Defs defs={e.defs} hl={hl} />
       </div>
     </article>
@@ -46,7 +46,7 @@ function Daily() {
   return (
     <section aria-labelledby="harini" className="ornate px-7 py-8 text-center sm:px-12">
       <p id="harini" className="rubric">Istilah Hari Ini</p>
-      <h2 className="mt-2 font-serif text-4xl leading-tight font-bold tracking-wide text-brand">
+      <h2 className="mt-2 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">
         <a href={`#/istilah/${e.id}`} className="hover:underline">
           {e.term}
         </a>
@@ -105,7 +105,7 @@ export default function Kamus({
 
   const searching = !!result
   const chip = (active: boolean) =>
-    `grid h-10 min-w-10 shrink-0 place-items-center rounded-md px-2 font-serif text-lg font-bold transition ${
+    `grid h-10 min-w-10 shrink-0 place-items-center rounded-md px-2 font-serif text-sm font-bold transition ${
       active ? 'bg-brand text-on-brand' : 'text-ink hover:bg-tint'
     }`
 
@@ -201,7 +201,7 @@ export default function Kamus({
             <>
               <div className="pt-2 text-center">
                 <p lang="ms-Arab" dir="rtl" className="text-2xl text-gold">قاموس سجاره</p>
-                <h1 className="font-serif text-5xl leading-none font-bold tracking-wide text-brand">Kamus Sejarah</h1>
+                <h1 className="font-serif text-3xl leading-tight font-bold text-brand sm:text-4xl">Kamus Sejarah</h1>
                 <Flourish className="mt-3" />
               </div>
               <Daily />
@@ -212,7 +212,7 @@ export default function Kamus({
               <h2 id={`huruf-${l}`} className="mb-5 flex items-center gap-4" aria-label={`Huruf ${l}, ${list.length} istilah`}>
                 <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/70" />
                 <span className="grid size-12 rotate-45 place-items-center border border-gold bg-brand shadow-sm ring-1 ring-gold/50 ring-offset-2 ring-offset-paper">
-                  <span className="-rotate-45 font-serif text-3xl leading-none font-bold text-on-brand">{l}</span>
+                  <span className="-rotate-45 font-serif text-2xl leading-none font-bold text-on-brand">{l}</span>
                 </span>
                 <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/70" />
               </h2>

@@ -93,7 +93,7 @@ export default function Flashcard() {
       <div className="rise pt-6 text-center">
         <div className="ornate px-6 py-12">
           <p className="rubric">Selesai</p>
-          <p className="mt-3 font-serif text-6xl font-bold text-brand">
+          <p className="mt-3 font-serif text-5xl font-bold text-brand">
             {s.known.length}
             <span className="text-2xl text-soft"> / {total}</span>
           </p>
@@ -151,7 +151,7 @@ export default function Flashcard() {
         <div className={`flip-inner ${s.flipped ? 'is-flipped' : ''}`}>
           <div className="flip-face ornate flex min-h-80 flex-col items-center justify-center p-8 text-center">
             <p className="rubric">Istilah</p>
-            <p className="mt-4 font-serif text-4xl leading-tight font-bold tracking-wide text-brand sm:text-5xl">{card.term}</p>
+            <p className="mt-4 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">{card.term}</p>
             <Flourish className="mt-4" />
             <p className="mt-4 text-soft italic">Ketik untuk lihat maksud</p>
           </div>

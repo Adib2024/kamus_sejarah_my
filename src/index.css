@@ -3,30 +3,30 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: "Cormorant Garamond Variable";
+  font-family: "Cinzel Decorative";
   font-style: normal;
-  font-weight: 300 700;
+  font-weight: 400 900;
   font-display: swap;
-  src: url("@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2") format("woff2-variations");
+  src: url("@fontsource/cinzel-decorative/files/cinzel-decorative-latin-700-normal.woff2") format("woff2");
 }
 @font-face {
-  font-family: "EB Garamond Variable";
+  font-family: "Crimson Pro Variable";
   font-style: normal;
-  font-weight: 400 800;
+  font-weight: 200 900;
   font-display: swap;
-  src: url("@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-normal.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/crimson-pro/files/crimson-pro-latin-wght-normal.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "EB Garamond Variable";
+  font-family: "Crimson Pro Variable";
   font-style: italic;
-  font-weight: 400 800;
+  font-weight: 200 900;
   font-display: swap;
-  src: url("@fontsource-variable/eb-garamond/files/eb-garamond-latin-wght-italic.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/crimson-pro/files/crimson-pro-latin-wght-italic.woff2") format("woff2-variations");
 }
 
 @theme inline {
-  --font-sans: "EB Garamond Variable", Georgia, "Times New Roman", serif;
-  --font-serif: "Cormorant Garamond Variable", "EB Garamond Variable", Georgia, serif;
+  --font-sans: "Crimson Pro Variable", Georgia, "Times New Roman", serif;
+  --font-serif: "Cinzel Decorative", "Crimson Pro Variable", Georgia, serif;
   --color-paper: var(--paper);
   --color-card: var(--card);
   --color-ink: var(--ink);
@@ -178,9 +178,9 @@ mark {
 /* label kecil ala rubrik */
 .rubric {
   font-family: var(--font-serif);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold);
 }
