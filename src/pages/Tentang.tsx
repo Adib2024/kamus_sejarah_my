@@ -15,12 +15,12 @@ export default function Tentang() {
             melalui Flashcard serta Kuiz.
           </p>
           <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-md bg-tint p-4">
-              <dt className="rubric">Penulis</dt>
+            <div className="rounded-xl bg-tint p-4">
+              <dt className="text-xs font-bold tracking-wider text-soft uppercase">Penulis</dt>
               <dd className="mt-1 font-serif text-lg font-semibold">Cg Surina</dd>
             </div>
-            <div className="rounded-md bg-tint p-4">
-              <dt className="rubric">Dibangunkan oleh</dt>
+            <div className="rounded-xl bg-tint p-4">
+              <dt className="text-xs font-bold tracking-wider text-soft uppercase">Dibangunkan oleh</dt>
               <dd className="mt-1 font-serif text-lg font-semibold">Adib</dd>
             </div>
           </dl>

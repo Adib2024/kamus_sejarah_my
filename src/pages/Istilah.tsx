@@ -36,7 +36,7 @@ export default function Istilah({ id }: { id: string }) {
           </nav>
         </>
       ) : (
-        <p className="rounded-md border border-dashed border-line px-6 py-14 text-center text-soft">
+        <p className="rounded-xl border border-dashed border-line px-6 py-14 text-center text-soft">
           Istilah ini tidak ditemui.
         </p>
       )}

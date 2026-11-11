@@ -119,20 +119,9 @@ export function Defs({ defs, hl }: { defs: Run[][]; hl?: RegExp | null }) {
   )
 }
 
-/** pemisah berhias */
-export function Flourish({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 160 16" aria-hidden="true" className={`mx-auto h-4 w-40 text-gold ${className}`} fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
-      <path d="M2 8h50M108 8h50" />
-      <path d="M52 8c6-7 12-7 16 0-4 7-10 7-16 0zM108 8c-6-7-12-7-16 0 4 7 10 7 16 0z" />
-      <path d="M80 2l6 6-6 6-6-6z" fill="currentColor" />
-    </svg>
-  )
-}
-
 export const btn =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 font-semibold tracking-wide transition active:scale-[0.98] disabled:opacity-40'
-export const btnPrimary = `${btn} bg-brand text-on-brand shadow-sm ring-1 ring-gold/40 ring-inset hover:opacity-90`
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition active:scale-[0.98] disabled:opacity-40'
+export const btnPrimary = `${btn} bg-brand text-on-brand hover:opacity-90`
 export const btnGhost = `${btn} border border-line bg-card text-ink hover:bg-tint`
 
 export function Chips<T extends string | number>({
@@ -156,7 +145,7 @@ export function Chips<T extends string | number>({
             type="button"
             aria-pressed={o.value === value}
             onClick={() => onChange(o.value)}
-            className={`min-h-11 rounded-md border px-4 font-medium transition ${
+            className={`min-h-11 rounded-xl border px-4 text-sm font-semibold transition ${
               o.value === value
                 ? 'border-brand bg-brand text-on-brand'
                 : 'border-line bg-card text-ink hover:bg-tint'
@@ -172,10 +161,9 @@ export function Chips<T extends string | number>({
 
 export function PageTitle({ title, sub }: { title: string; sub: string }) {
   return (
-    <header className="mb-6 text-center">
-      <h1 className="font-serif text-2xl font-bold text-brand sm:text-3xl">{title}</h1>
-      <Flourish className="mt-2" />
-      <p className="mx-auto mt-2 max-w-md text-soft">{sub}</p>
+    <header className="mb-6">
+      <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
+      <p className="mt-1.5 text-soft">{sub}</p>
     </header>
   )
 }

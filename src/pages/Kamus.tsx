@@ -2,40 +2,34 @@ import { memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 're
 import { entries, entryText, letterCount, LETTERS, type Entry } from '../lib/data'
 import { highlighter, search } from '../lib/search'
 import { copyText, dailyIndex, shareEntry } from '../lib/store'
-import { Defs, Flourish, Icon, Marked } from '../components/ui'
+import { Defs, Icon, Marked } from '../components/ui'
 
 export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: RegExp | null }) {
+  const act = 'grid size-9 place-items-center rounded-lg hover:bg-tint hover:text-ink'
   return (
-    <article className="entry folio px-5 py-4">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-[1.05rem] leading-snug font-bold text-brand">
-          <a href={`#/istilah/${e.id}`} className="hover:underline">
-            <Marked text={e.term} hl={hl} />
-          </a>
-        </h3>
-        <div className="-mt-1.5 -mr-2 flex shrink-0 text-soft">
-          <button
-            type="button"
-            aria-label={`Salin ${e.term}`}
-            title="Salin"
-            onClick={() => copyText(entryText(e))}
-            className="grid size-10 place-items-center rounded-md hover:bg-tint hover:text-ink"
-          >
-            <Icon name="copy" className="size-[18px]" />
-          </button>
-          <button
-            type="button"
-            aria-label={`Kongsi ${e.term}`}
-            title="Kongsi"
-            onClick={() => shareEntry(e.term, entryText(e), e.id)}
-            className="grid size-10 place-items-center rounded-md hover:bg-tint hover:text-ink"
-          >
-            <Icon name="share" className="size-[18px]" />
-          </button>
+    <article className="entry folio flex gap-3 p-3.5 sm:gap-4 sm:p-4">
+      <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-xl bg-tint font-serif text-lg font-bold text-brand">
+        {e.letter}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="pt-1.5 leading-snug font-extrabold tracking-tight">
+            <a href={`#/istilah/${e.id}`} className="hover:underline">
+              <Marked text={e.term} hl={hl} />
+            </a>
+          </h3>
+          <div className="-mr-1.5 flex shrink-0 text-soft">
+            <button type="button" aria-label={`Salin ${e.term}`} title="Salin" onClick={() => copyText(entryText(e))} className={act}>
+              <Icon name="copy" className="size-[17px]" />
+            </button>
+            <button type="button" aria-label={`Kongsi ${e.term}`} title="Kongsi" onClick={() => shareEntry(e.term, entryText(e), e.id)} className={act}>
+              <Icon name="share" className="size-[17px]" />
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="mt-1.5 leading-relaxed text-ink/90">
-        <Defs defs={e.defs} hl={hl} />
+        <div className="mt-0.5 leading-relaxed text-ink/85">
+          <Defs defs={e.defs} hl={hl} />
+        </div>
       </div>
     </article>
   )
@@ -44,15 +38,14 @@ export const EntryCard = memo(function EntryCard({ e, hl }: { e: Entry; hl?: Reg
 function Daily() {
   const e = entries[dailyIndex(entries.length)]
   return (
-    <section aria-labelledby="harini" className="ornate px-7 py-8 text-center sm:px-12">
-      <p id="harini" className="rubric">Istilah Hari Ini</p>
-      <h2 className="mt-2 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">
+    <section aria-labelledby="harini" className="ornate p-5 sm:p-6">
+      <p id="harini" className="rubric">★ Istilah Hari Ini</p>
+      <h2 className="mt-3 font-serif text-2xl leading-tight font-bold tracking-tight sm:text-3xl">
         <a href={`#/istilah/${e.id}`} className="hover:underline">
           {e.term}
         </a>
       </h2>
-      <Flourish className="my-3" />
-      <div className="text-lg leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
+      <div className="mt-2 leading-relaxed text-ink/85">
         <Defs defs={e.defs} />
       </div>
     </section>
@@ -104,15 +97,22 @@ export default function Kamus({
   }, [letter])
 
   const searching = !!result
+  const home = !searching && !letter
   const chip = (active: boolean) =>
-    `grid h-10 min-w-10 shrink-0 place-items-center rounded-md px-2 font-serif text-sm font-bold transition ${
-      active ? 'bg-brand text-on-brand' : 'text-ink hover:bg-tint'
+    `grid h-9 min-w-9 shrink-0 place-items-center rounded-lg px-2.5 text-sm font-bold transition ${
+      active ? 'bg-chip text-on-chip' : 'opacity-80 hover:bg-white/10 hover:opacity-100'
     }`
 
   return (
     <div>
+      {home && (
+        <div className="bar bleed pt-4 pb-1">
+          <h1 className="font-serif text-4xl leading-none font-bold tracking-tight sm:text-5xl">Kamus Sejarah</h1>
+          <p className="mt-2 text-sm opacity-80">{entries.length} istilah untuk guru &amp; pelajar · oleh Cg Surina</p>
+        </div>
+      )}
       {/* carian — melekat di atas */}
-      <div className="sticky top-[68px] z-20 -mx-4 border-b border-line/60 bg-paper/95 px-4 pt-4 pb-2 backdrop-blur sm:top-[76px]">
+      <div className="bar bleed sticky top-14 z-20 rounded-b-3xl pt-3 pb-3 shadow-sm sm:top-16 dark:border-b dark:border-line">
         <div className="relative">
           <Icon name="search" className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-soft" />
           <input
@@ -128,7 +128,7 @@ export default function Kamus({
             onKeyDown={(ev) => ev.key === 'Escape' && setQuery('')}
             placeholder={`Cari ${entries.length} istilah atau maksud…`}
             aria-label="Cari istilah atau maksud"
-            className="h-13 w-full rounded-md border border-gold/60 bg-card pr-12 pl-12 text-lg shadow-sm outline-none placeholder:text-soft placeholder:italic focus:border-brand focus:ring-2 focus:ring-brand/20 [&::-webkit-search-cancel-button]:hidden"
+            className="h-12 w-full rounded-xl border border-transparent bg-card pr-12 pl-12 text-base text-ink outline-none placeholder:text-soft focus:ring-2 focus:ring-chip/70 dark:border-line dark:bg-tint [&::-webkit-search-cancel-button]:hidden"
           />
           {query && (
             <button
@@ -138,7 +138,7 @@ export default function Kamus({
                 setQuery('')
                 input.current?.focus()
               }}
-              className="absolute top-1/2 right-2 grid size-10 -translate-y-1/2 place-items-center rounded-md text-soft hover:bg-tint hover:text-ink"
+              className="absolute top-1/2 right-2 grid size-10 -translate-y-1/2 place-items-center rounded-xl text-soft hover:bg-tint hover:text-ink"
             >
               <Icon name="x" />
             </button>
@@ -146,7 +146,7 @@ export default function Kamus({
         </div>
 
         {!searching && (
-          <nav aria-label="Tapis ikut huruf" className="no-scrollbar -mx-4 mt-2 flex gap-0.5 overflow-x-auto px-4">
+          <nav aria-label="Tapis ikut huruf" className="no-scrollbar -mx-4 mt-2.5 flex gap-1 overflow-x-auto px-4">
             <button type="button" aria-pressed={!letter} onClick={() => setLetter('')} className={chip(!letter)}>
               Semua
             </button>
@@ -170,16 +170,14 @@ export default function Kamus({
         )}
       </div>
 
-      <p role="status" className="mt-3 mb-3 text-center text-soft italic">
+      <p role="status" className="mt-4 mb-3 text-sm text-soft empty:mb-5">
         {searching
           ? result.items.length
             ? result.fuzzy
               ? `Tiada padanan tepat. Mungkin maksud anda:`
               : `${result.items.length} hasil untuk “${deferred.trim()}”`
             : ''
-          : letter
-            ? `${letterCount[letter]} istilah bermula dengan huruf ${letter}`
-            : ''}
+          : ''}
       </p>
 
       {searching ? (
@@ -190,31 +188,20 @@ export default function Kamus({
             ))}
           </div>
         ) : (
-          <div className="rounded-md border border-dashed border-line px-6 py-14 text-center">
+          <div className="rounded-xl border border-dashed border-line px-6 py-14 text-center">
             <p className="font-serif text-xl font-semibold">Tiada hasil untuk “{deferred.trim()}”</p>
             <p className="mt-2 text-soft">Semak ejaan, atau cuba perkataan yang lebih pendek.</p>
           </div>
         )
       ) : (
-        <div className="space-y-8">
-          {!letter && (
-            <>
-              <div className="pt-2 text-center">
-                <p lang="ms-Arab" dir="rtl" className="text-2xl text-gold">قاموس سجاره</p>
-                <h1 className="font-serif text-3xl leading-tight font-bold text-brand sm:text-4xl">Kamus Sejarah</h1>
-                <Flourish className="mt-3" />
-              </div>
-              <Daily />
-            </>
-          )}
+        <div className="space-y-7">
+          {!letter && <Daily />}
           {groups.map(([l, list]) => (
             <section key={l} aria-labelledby={`huruf-${l}`}>
-              <h2 id={`huruf-${l}`} className="mb-5 flex items-center gap-4" aria-label={`Huruf ${l}, ${list.length} istilah`}>
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/70" />
-                <span className="grid size-12 rotate-45 place-items-center border border-gold bg-brand shadow-sm ring-1 ring-gold/50 ring-offset-2 ring-offset-paper">
-                  <span className="-rotate-45 font-serif text-2xl leading-none font-bold text-on-brand">{l}</span>
-                </span>
-                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/70" />
+              <h2 id={`huruf-${l}`} className="mb-3 flex items-baseline gap-3" aria-label={`Huruf ${l}, ${list.length} istilah`}>
+                <span className="font-serif text-4xl leading-none font-bold text-brand">{l}</span>
+                <span className="text-sm text-soft">{list.length} istilah</span>
+                <span className="h-px flex-1 self-center bg-line" />
               </h2>
               <div className="space-y-2.5">
                 {list.map((e) => (

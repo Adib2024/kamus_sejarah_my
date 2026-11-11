@@ -3,30 +3,30 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-  font-family: "Cinzel Decorative";
+  font-family: "Fraunces Variable";
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("@fontsource/cinzel-decorative/files/cinzel-decorative-latin-700-normal.woff2") format("woff2");
+  src: url("@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Crimson Pro Variable";
+  font-family: "Plus Jakarta Sans Variable";
   font-style: normal;
-  font-weight: 200 900;
+  font-weight: 200 800;
   font-display: swap;
-  src: url("@fontsource-variable/crimson-pro/files/crimson-pro-latin-wght-normal.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Crimson Pro Variable";
+  font-family: "Plus Jakarta Sans Variable";
   font-style: italic;
-  font-weight: 200 900;
+  font-weight: 200 800;
   font-display: swap;
-  src: url("@fontsource-variable/crimson-pro/files/crimson-pro-latin-wght-italic.woff2") format("woff2-variations");
+  src: url("@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-italic.woff2") format("woff2-variations");
 }
 
 @theme inline {
-  --font-sans: "Crimson Pro Variable", Georgia, "Times New Roman", serif;
-  --font-serif: "Cinzel Decorative", "Crimson Pro Variable", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --color-paper: var(--paper);
   --color-card: var(--card);
   --color-ink: var(--ink);
@@ -35,6 +35,9 @@
   --color-brand: var(--brand);
   --color-on-brand: var(--on-brand);
   --color-bar: var(--bar);
+  --color-bar-ink: var(--bar-ink);
+  --color-chip: var(--chip);
+  --color-on-chip: var(--on-chip);
   --color-gold: var(--gold);
   --color-tint: var(--tint);
   --color-ok: var(--ok);
@@ -42,53 +45,68 @@
   --color-hl: var(--hl);
 }
 
+/* Tema cerah "Warisan": hijau zamrud + emas */
 :root {
-  /* kertas manuskrip lama, dakwat merah hati, emas */
-  --paper: #eee1c4;
-  --card: #faf3df;
-  --ink: #2a1c10;
-  --soft: #6a563c;
-  --line: #d3bd8e;
-  --brand: #7b1e1e;
-  --on-brand: #fbf3df;
-  --bar: #6a1717;
-  --gold: #86600c;
-  --tint: #f0e2bd;
-  --ok: #2f6b3a;
-  --bad: #a3271d;
-  --hl: #f1cf6e;
+  --paper: #f3f6f4;
+  --card: #ffffff;
+  --ink: #12332b;
+  --soft: #5a6f69;
+  --line: #dfe7e4;
+  --brand: #0e5a4a;
+  --on-brand: #ffffff;
+  --bar: #0e5a4a;
+  --bar-ink: #ffffff;
+  --bar-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 2l18 18-18 18L2 20z' fill='none' stroke='%23fff' stroke-opacity='.13'/%3E%3Cpath d='M20 12l8 8-8 8-8-8z' fill='%23fff' fill-opacity='.08'/%3E%3C/svg%3E");
+  --chip: #ffffff;
+  --on-chip: #0e5a4a;
+  --gold: #946a00;
+  --badge: #c8940f;
+  --feature: #fff7e0;
+  --feature-line: #ecd58c;
+  --tint: #dcefe9;
+  --ok: #17794f;
+  --bad: #b3362b;
+  --hl: #fde68a;
   color-scheme: light;
 }
+/* Tema gelap "Muzium": arang + emas */
 .dark {
-  --paper: #17110b;
-  --card: #221911;
-  --ink: #ecdfc6;
-  --soft: #b5a283;
-  --line: #4d3b22;
-  --brand: #e6b566;
-  --on-brand: #1d140c;
-  --bar: #4a1212;
-  --gold: #d9a441;
-  --tint: #2e2115;
-  --ok: #86cb9d;
-  --bad: #f0937f;
-  --hl: #6d4f10;
+  --paper: #0f1115;
+  --card: #171a20;
+  --ink: #e9e6df;
+  --soft: #9a958a;
+  --line: #272b34;
+  --brand: #c9a55a;
+  --on-brand: #0f1115;
+  --bar: #0f1115;
+  --bar-ink: #e9e6df;
+  --bar-pattern: none;
+  --chip: #c9a55a;
+  --on-chip: #0f1115;
+  --gold: #c9a55a;
+  --badge: #c9a55a;
+  --feature: #0f1115;
+  --feature-line: #c9a55a;
+  --tint: #20242c;
+  --ok: #6fcf9a;
+  --bad: #f08a7f;
+  --hl: #5a4712;
   color-scheme: dark;
 }
 
 html {
-  font-size: 112.5%;
+  font-size: 100%;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
-html[data-fs="1"] { font-size: 125%; }
-html[data-fs="2"] { font-size: 140%; }
+html[data-fs="1"] { font-size: 112.5%; }
+html[data-fs="2"] { font-size: 125%; }
 
 body {
-  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .22  0 0 0 0 .08  0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url%28%23n%29' opacity='.16'/%3E%3C/svg%3E");
+  background: var(--paper);
   color: var(--ink);
-  font-variant-numeric: lining-nums;
   overflow-wrap: anywhere;
+  overflow-x: clip;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -106,7 +124,7 @@ mark {
 }
 
 /* senarai panjang: pelayar hanya lukis kad yang kelihatan */
-.entry { content-visibility: auto; contain-intrinsic-size: auto 110px; }
+.entry { content-visibility: auto; contain-intrinsic-size: auto 100px; }
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -138,51 +156,51 @@ mark {
   .rise { animation: none; }
 }
 
-/* ---------- gaya manuskrip ---------- */
+/* ---------- gaya ---------- */
 
-/* helaian: bingkai dua garis seperti halaman hikayat */
+/* jalur atas: pengepala, tajuk dan carian berkongsi satu latar */
+.bar {
+  background: var(--bar) var(--bar-pattern) fixed;
+  color: var(--bar-ink);
+}
+/* lebar penuh skrin, kandungan kekal sejajar dengan lajur utama */
+.bleed {
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+}
+
+/* kad istilah */
 .folio {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 6px;
-  box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 16px;
 }
 
-/* panel utama: bingkai emas dengan hiasan penjuru */
+/* panel utama */
 .ornate {
-  position: relative;
-  background: var(--card);
-  border: 1px solid #b08a2e;
-  border-radius: 4px;
-  box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px color-mix(in srgb, #b08a2e 55%, transparent), 0 2px 10px rgb(60 35 10 / 0.12);
-}
-.ornate::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  pointer-events: none;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") top left / 34px no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='translate%2834 0%29 scale%28-1 1%29' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") top right / 34px no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='translate%280 34%29 scale%281 -1%29' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") bottom left / 34px no-repeat,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cg transform='translate%2834 34%29 scale%28-1 -1%29' fill='none' stroke='%23b08a2e' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M3 31V11a8 8 0 0 1 8-8h20'/%3E%3Cpath d='M7 31V13a6 6 0 0 1 6-6h18'/%3E%3Cpath d='M3 17c7 0 14-7 14-14'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23b08a2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E") bottom right / 34px no-repeat;
+  background: var(--feature);
+  border: 1px solid var(--feature-line);
+  border-radius: 20px;
 }
 
-/* jalur songket */
-.songket {
-  height: 12px;
-  background: #4f0f0f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='12'%3E%3Cpath d='M0 6l7-5 7 5-7 5zM14 6l7-5 7 5-7 5z' fill='none' stroke='%23b08a2e' stroke-width='1'/%3E%3Cpath d='M7 4l2.5 2-2.5 2-2.5-2zM21 4l2.5 2-2.5 2-2.5-2z' fill='%23b08a2e'/%3E%3C/svg%3E") repeat-x center / 28px 12px;
-  border-block: 1px solid #b08a2e;
-}
-
-/* label kecil ala rubrik */
+/* lencana kecil */
 .rubric {
-  font-family: var(--font-serif);
+  display: inline-block;
   font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--on-brand);
+  background: var(--badge);
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+}
+.dark .rubric {
+  background: none;
   color: var(--gold);
+  padding: 0;
+  letter-spacing: 0.22em;
+  font-weight: 600;
 }
 
 kbd {

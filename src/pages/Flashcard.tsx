@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { entries, letterCount, LETTERS, type Entry } from '../lib/data'
 import { shuffle, useStored } from '../lib/store'
-import { btnGhost, btnPrimary, Chips, Defs, Flourish, Icon, PageTitle } from '../components/ui'
+import { btnGhost, btnPrimary, Chips, Defs, Icon, PageTitle } from '../components/ui'
 
 type Session = { deck: Entry[]; pos: number; flipped: boolean; known: Entry[]; unknown: Entry[] }
 
@@ -70,7 +70,7 @@ export default function Flashcard() {
               id="fc-huruf"
               value={letter}
               onChange={(ev) => setLetter(ev.target.value)}
-              className="h-11 w-full rounded-md border border-line bg-card px-3 sm:w-64"
+              className="h-11 w-full rounded-xl border border-line bg-card px-3 sm:w-64"
             >
               <option value="">Semua huruf ({entries.length} istilah)</option>
               {LETTERS.filter((l) => letterCount[l]).map((l) => (
@@ -123,7 +123,7 @@ export default function Flashcard() {
   return (
     <div className="pt-6">
       <div className="mb-4 flex items-center gap-3">
-        <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-md text-soft hover:bg-tint">
+        <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-xl text-soft hover:bg-tint">
           <Icon name="x" />
         </button>
         <div
@@ -149,19 +149,17 @@ export default function Flashcard() {
         className="flip rise block w-full text-left"
       >
         <div className={`flip-inner ${s.flipped ? 'is-flipped' : ''}`}>
-          <div className="flip-face ornate flex min-h-80 flex-col items-center justify-center p-8 text-center">
+          <div className="flip-face folio flex min-h-80 flex-col items-center justify-center !rounded-3xl p-8 text-center shadow-sm">
             <p className="rubric">Istilah</p>
-            <p className="mt-4 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">{card.term}</p>
-            <Flourish className="mt-4" />
-            <p className="mt-4 text-soft italic">Ketik untuk lihat maksud</p>
+            <p className="mt-4 font-serif text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{card.term}</p>
+            <p className="mt-6 text-sm text-soft">Ketik untuk lihat maksud</p>
           </div>
           <div
             aria-hidden={!s.flipped}
             className="flip-face flip-back ornate flex min-h-80 flex-col justify-center px-9 py-10 text-center"
           >
             <p className="rubric">{card.term}</p>
-            <Flourish className="mt-2" />
-            <div className="mt-3 text-xl leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
+            <div className="mt-4 text-xl leading-relaxed [&_ol]:inline-block [&_ol]:text-left">
               <Defs defs={card.defs} />
             </div>
           </div>
