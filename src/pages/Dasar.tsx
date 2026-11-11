@@ -196,7 +196,7 @@ export const DOC_LINKS = [
 export default function Dasar({ id }: { id: string }) {
   const doc = DOCS[id]
   return (
-    <div className="mx-auto max-w-3xl pt-8 sm:pt-12">
+    <div className="mx-auto max-w-3xl pt-4 sm:pt-12">
       <a href="#/tentang" className="mb-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-gold hover:underline">
         <Icon name="left" className="size-4" /> Tentang
       </a>

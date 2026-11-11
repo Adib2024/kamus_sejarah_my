@@ -170,10 +170,10 @@ export function Chips<T extends string | number>({
 
 export function PageTitle({ title, sub, kicker }: { title: string; sub: string; kicker?: string }) {
   return (
-    <header className="mb-8">
+    <header className="mb-6 sm:mb-8">
       {kicker && <p className="rubric rise">{kicker}</p>}
-      <h1 className="rise d1 mt-3 font-serif text-4xl leading-[1.05] font-semibold tracking-tight sm:text-5xl">{title}</h1>
-      <p className="rise d2 mt-3 max-w-xl text-lg text-soft">{sub}</p>
+      <h1 className="rise d1 mt-2.5 font-serif text-[2.1rem] leading-[1.05] font-semibold tracking-tight sm:mt-3 sm:text-5xl">{title}</h1>
+      <p className="rise d2 mt-2.5 max-w-xl text-soft sm:mt-3 sm:text-lg">{sub}</p>
     </header>
   )
 }

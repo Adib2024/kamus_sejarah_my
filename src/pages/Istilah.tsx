@@ -27,7 +27,7 @@ export default function Istilah({ id, openCategory, openLetter }: { id: string; 
 
   const fact = 'flex items-baseline justify-between gap-4 border-b border-line py-3 last:border-0'
   return (
-    <article className="pt-8 sm:pt-12">
+    <article className="pt-5 sm:pt-12">
       <nav aria-label="Lokasi" className="rise flex flex-wrap items-center gap-2 text-sm text-soft">
         <a href="#/kamus" className="font-semibold hover:text-ink hover:underline">
           Kamus
@@ -38,32 +38,32 @@ export default function Istilah({ id, openCategory, openLetter }: { id: string; 
         </button>
       </nav>
 
-      <header className="mt-7 border-b border-line pb-9">
+      <header className="mt-5 border-b border-line pb-6 sm:mt-7 sm:pb-9">
         <p className="rubric rise d1">{e.cat === UMUM ? 'Istilah Sejarah' : e.cat}</p>
-        <h1 className="rise d2 mt-4 font-serif text-[2.5rem] leading-[1.03] font-semibold tracking-tight text-brand sm:text-7xl">{e.term}</h1>
-        <div className="rise d3 mt-6 flex flex-wrap items-center gap-2">
+        <h1 className="rise d2 mt-3 font-serif text-[2.1rem] leading-[1.05] font-semibold tracking-tight text-brand sm:mt-4 sm:text-7xl">{e.term}</h1>
+        <div className="rise d3 mt-4 flex flex-wrap items-center gap-2 sm:mt-6">
           {e.period && <span className="badge badge-era">{e.period}</span>}
           {e.cat !== UMUM && <span className="badge">{e.cat}</span>}
           {e.defs.length > 1 && <span className="badge">{e.defs.length} maksud</span>}
         </div>
       </header>
 
-      <div className="rise d4 mt-10 grid gap-x-14 gap-y-10 lg:grid-cols-[1fr_19rem]">
+      <div className="rise d4 mt-7 grid gap-x-14 gap-y-8 sm:mt-10 sm:gap-y-10 lg:grid-cols-[1fr_19rem]">
         {/* definisi */}
         <section aria-labelledby="definisi">
           <h2 id="definisi" className="rubric">
             Definisi
           </h2>
           {e.defs.length === 1 ? (
-            <p className="mt-5 border-l-2 border-gilt pl-5 font-serif text-2xl leading-[1.5] sm:pl-7 sm:text-[1.75rem]">
+            <p className="mt-4 border-l-2 border-gilt pl-4 font-serif text-[1.3rem] leading-[1.55] sm:mt-5 sm:pl-7 sm:text-[1.75rem] sm:leading-[1.5]">
               <Rich runs={e.defs[0]} />
             </p>
           ) : (
             <ol className="mt-5 space-y-6">
               {e.defs.map((d, n) => (
-                <li key={n} className="grid grid-cols-[2.5rem_1fr] border-l-2 border-gilt pl-5 sm:pl-7">
+                <li key={n} className="grid grid-cols-[2rem_1fr] border-l-2 border-gilt pl-4 sm:grid-cols-[2.5rem_1fr] sm:pl-7">
                   <span className="font-serif text-2xl font-semibold text-gilt tabular-nums">{n + 1}</span>
-                  <p className="font-serif text-xl leading-[1.55] sm:text-2xl">
+                  <p className="font-serif text-[1.2rem] leading-[1.55] sm:text-2xl">
                     <Rich runs={d} />
                   </p>
                 </li>
@@ -72,7 +72,7 @@ export default function Istilah({ id, openCategory, openLetter }: { id: string; 
           )}
 
           {e.years.length > 0 && (
-            <section aria-labelledby="tahun" className="mt-12">
+            <section aria-labelledby="tahun" className="mt-8 sm:mt-12">
               <h2 id="tahun" className="rubric">
                 Tahun yang disebut
               </h2>
@@ -128,12 +128,12 @@ export default function Istilah({ id, openCategory, openLetter }: { id: string; 
       </div>
 
       {rel.length > 0 && (
-        <section aria-labelledby="berkaitan" className="mt-16 border-t border-line pt-10">
+        <section aria-labelledby="berkaitan" className="mt-10 border-t border-line pt-8 sm:mt-16 sm:pt-10">
           <p className="rubric">Teruskan membaca</p>
-          <h2 id="berkaitan" className="mt-3 font-serif text-3xl font-semibold tracking-tight">
+          <h2 id="berkaitan" className="mt-2.5 font-serif text-[1.7rem] font-semibold tracking-tight sm:mt-3 sm:text-3xl">
             Istilah berkaitan
           </h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="rail mt-5 gap-3 sm:mt-6 sm:grid sm:grid-cols-2 lg:grid-cols-3">
             {rel.map((r) => (
               <li key={r.id}>
                 <MiniCard e={r} />
@@ -143,7 +143,7 @@ export default function Istilah({ id, openCategory, openLetter }: { id: string; 
         </section>
       )}
 
-      <nav aria-label="Istilah bersebelahan" className="mt-12 grid grid-cols-2 gap-3 border-t border-line pt-6">
+      <nav aria-label="Istilah bersebelahan" className="mt-8 grid grid-cols-2 gap-3 border-t border-line pt-5 sm:mt-12 sm:pt-6">
         {prev ? (
           <a href={`#/istilah/${prev.id}`} className="group min-w-0">
             <span className="flex items-center gap-1.5 text-xs font-bold tracking-widest text-soft uppercase">

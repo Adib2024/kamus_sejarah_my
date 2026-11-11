@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { entries, letterCount, LETTERS, type Entry } from '../lib/data'
 import { shuffle, useStored } from '../lib/store'
 import { btnGhost, btnPrimary, Chips, Defs, Icon, PageTitle } from '../components/ui'
@@ -11,6 +11,9 @@ export default function Flashcard() {
   const [size, setSize] = useStored<number>('fc-saiz', 10)
   const [letter, setLetter] = useStored<string>('fc-huruf', '')
   const [s, setS] = useState<Session | null>(null)
+  const [dx, setDx] = useState(0)
+  const drag = useRef<{ x: number; moved: boolean } | null>(null)
+  const swiped = useRef(false)
 
   const pool = letter ? entries.filter((e) => e.letter === letter) : entries
   const begin = () => setS(start(shuffle(pool).slice(0, size || pool.length)))
@@ -48,7 +51,7 @@ export default function Flashcard() {
 
   if (!s)
     return (
-      <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
+      <div className="mx-auto max-w-2xl pt-6 sm:pt-14">
         <PageTitle kicker="Ulang kaji" title="Flashcard" sub="Lihat istilah, cuba ingat maksudnya, kemudian ketik kad untuk semak." />
         <div className="space-y-6 folio p-5 sm:p-6">
           <Chips
@@ -90,7 +93,7 @@ export default function Flashcard() {
   const total = s.deck.length
   if (!active)
     return (
-      <div className="rise mx-auto max-w-2xl pt-10 text-center sm:pt-14">
+      <div className="rise mx-auto max-w-2xl pt-6 text-center sm:pt-14">
         <div className="ornate px-6 py-12">
           <p className="rubric">Selesai</p>
           <p className="mt-3 font-serif text-5xl font-bold text-brand">
@@ -120,8 +123,30 @@ export default function Flashcard() {
     )
 
   const card = s.deck[s.pos]
+  // leret: kanan = sudah ingat, kiri = belum ingat; ketikan biasa memusing kad
+  const onDown = (ev: React.PointerEvent) => {
+    drag.current = { x: ev.clientX, moved: false }
+  }
+  const onMove = (ev: React.PointerEvent) => {
+    if (!drag.current) return
+    const d = ev.clientX - drag.current.x
+    if (Math.abs(d) > 8) drag.current.moved = true
+    if (drag.current.moved) setDx(d)
+  }
+  const onUp = () => {
+    const d = dx
+    const moved = drag.current?.moved
+    drag.current = null
+    setDx(0)
+    if (!moved) return
+    // telan klik yang menyusul leretan sahaja, bukan ketikan seterusnya
+    swiped.current = true
+    setTimeout(() => (swiped.current = false), 60)
+    if (Math.abs(d) > 80) mark(d > 0)
+  }
+  const lean = Math.max(-1, Math.min(1, dx / 80))
   return (
-    <div className="mx-auto max-w-2xl pt-10 sm:pt-14">
+    <div className="mx-auto max-w-2xl pt-6 sm:pt-14">
       <div className="mb-4 flex items-center gap-3">
         <button type="button" onClick={() => setS(null)} aria-label="Tamatkan sesi" className="grid size-10 place-items-center rounded-full text-soft hover:bg-tint">
           <Icon name="x" />
@@ -144,22 +169,42 @@ export default function Flashcard() {
       <button
         key={card.id}
         type="button"
-        onClick={flip}
+        onClick={() => {
+          if (swiped.current) swiped.current = false
+          else flip()
+        }}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerCancel={() => {
+          drag.current = null
+          setDx(0)
+        }}
         aria-label={s.flipped ? 'Kad menunjukkan maksud. Ketik untuk lihat istilah.' : 'Kad menunjukkan istilah. Ketik untuk lihat maksud.'}
-        className="flip rise block w-full text-left"
+        className="flip rise relative block w-full touch-pan-y text-left select-none"
+        style={dx ? { transform: `translateX(${dx}px) rotate(${lean * 4}deg)`, transition: 'none' } : { transition: 'transform 0.25s var(--ease-out-soft)' }}
       >
+        {dx !== 0 && (
+          <span
+            className={`pointer-events-none absolute top-4 z-10 rounded-full px-4 py-1.5 text-sm font-bold text-white ${dx > 0 ? 'left-4 bg-ok' : 'right-4 bg-bad'}`}
+            style={{ opacity: Math.abs(lean) }}
+          >
+            {dx > 0 ? 'Sudah ingat' : 'Belum ingat'}
+          </span>
+        )}
         <div className={`flip-inner ${s.flipped ? 'is-flipped' : ''}`}>
-          <div className="flip-face folio flex min-h-96 flex-col items-center justify-center !rounded-[22px] p-8 text-center shadow-xl shadow-[#101c2c]/10">
+          <div className="flip-face folio flex min-h-[44dvh] flex-col sm:min-h-96 items-center justify-center !rounded-[22px] p-8 text-center shadow-xl shadow-[#101c2c]/10">
             <p className="rubric">Istilah</p>
-            <p className="mt-4 font-serif text-4xl leading-tight font-semibold tracking-tight text-brand sm:text-5xl">{card.term}</p>
+            <p className="mt-4 font-serif text-3xl leading-tight font-semibold tracking-tight text-brand sm:text-5xl">{card.term}</p>
             <p className="mt-6 text-sm text-soft">Ketik untuk lihat maksud</p>
+            <p className="mt-1 text-xs text-soft sm:hidden">Leret kanan: sudah ingat · kiri: belum</p>
           </div>
           <div
             aria-hidden={!s.flipped}
-            className="flip-face flip-back ornate flex min-h-96 flex-col justify-center !rounded-[22px] px-8 py-10 text-center"
+            className="flip-face flip-back ornate flex min-h-[44dvh] flex-col sm:min-h-96 justify-center !rounded-[22px] px-6 py-8 text-center sm:px-8 sm:py-10"
           >
             <p className="rubric">{card.term}</p>
-            <div className="mt-5 font-serif text-xl leading-relaxed sm:text-2xl [&_ol]:inline-block [&_ol]:text-left">
+            <div className="mt-4 font-serif text-[1.15rem] leading-relaxed sm:mt-5 sm:text-2xl [&_ol]:inline-block [&_ol]:text-left">
               <Defs defs={card.defs} />
             </div>
           </div>

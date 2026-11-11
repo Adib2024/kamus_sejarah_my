@@ -143,8 +143,8 @@ export default function App() {
         )}
       </main>
 
-      <footer className="navy mt-24">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+      <footer className="navy mt-16 sm:mt-24">
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:gap-10 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
               <img src="./favicon.svg" alt="" className="size-10 rounded-[10px]" />
@@ -154,7 +154,7 @@ export default function App() {
             </div>
             <p className="mt-4 max-w-sm leading-relaxed text-soft">Menyingkap sejarah, memahami peradaban. Rujukan istilah Sejarah untuk guru dan pelajar.</p>
           </div>
-          <nav aria-label="Pautan" className="text-sm">
+          <nav aria-label="Pautan" className="hidden text-sm md:block">
             <p className="rubric">Jelajah</p>
             <ul className="mt-4 space-y-2.5">
               {TABS.map((tab) => (
@@ -168,7 +168,7 @@ export default function App() {
           </nav>
           <nav aria-label="Dasar dan terma" className="text-sm">
             <p className="rubric">Dasar</p>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2.5 md:block md:space-y-2.5">
               {DOC_LINKS.map((d) => (
                 <li key={d.path}>
                   <a href={`#/${d.path}`} className="font-semibold text-on-navy/85 transition hover:text-gilt">
@@ -197,7 +197,7 @@ export default function App() {
               key={tab.path}
               href={`#/${tab.path}`}
               aria-current={current === tab.path ? 'page' : undefined}
-              className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[0.68rem] font-bold transition ${current === tab.path ? 'text-brand' : 'text-soft'}`}
+              className={`relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-bold transition ${current === tab.path ? 'text-brand' : 'text-soft'}`}
             >
               <span className={`absolute top-0 h-0.5 w-8 rounded-full bg-gilt transition-transform duration-300 ${current === tab.path ? 'scale-x-100' : 'scale-x-0'}`} />
               <Icon name={tab.icon} />
