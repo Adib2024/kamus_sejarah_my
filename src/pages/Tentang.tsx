@@ -2,7 +2,7 @@ import { entries } from '../lib/data'
 import { PageTitle } from '../components/ui'
 
 export default function Tentang() {
-  const card = 'rounded-2xl border border-line bg-card p-5 sm:p-6'
+  const card = 'folio p-5 sm:p-6'
   return (
     <div className="pt-6">
       <PageTitle title="Tentang" sub="Kamus istilah Sejarah untuk guru dan pelajar." />
@@ -15,12 +15,12 @@ export default function Tentang() {
             melalui Flashcard serta Kuiz.
           </p>
           <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl bg-tint p-4">
-              <dt className="text-xs font-bold tracking-widest text-gold uppercase">Penulis</dt>
+            <div className="rounded-md bg-tint p-4">
+              <dt className="rubric">Penulis</dt>
               <dd className="mt-1 font-serif text-lg font-semibold">Cg Surina</dd>
             </div>
-            <div className="rounded-xl bg-tint p-4">
-              <dt className="text-xs font-bold tracking-widest text-gold uppercase">Dibangunkan oleh</dt>
+            <div className="rounded-md bg-tint p-4">
+              <dt className="rubric">Dibangunkan oleh</dt>
               <dd className="mt-1 font-serif text-lg font-semibold">Adib</dd>
             </div>
           </dl>

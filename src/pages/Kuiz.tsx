@@ -40,7 +40,7 @@ export default function Kuiz() {
     return (
       <div className="pt-6">
         <PageTitle title="Kuiz" sub="Uji kefahaman anda. Soalan dipilih secara rawak daripada kamus." />
-        <div className="space-y-6 rounded-2xl border border-line bg-card p-5 sm:p-6">
+        <div className="space-y-6 folio p-5 sm:p-6">
           <Chips
             label="Bilangan soalan"
             value={count}
@@ -77,9 +77,9 @@ export default function Kuiz() {
     const record = best[`${mode}-${total}`] ?? 0
     return (
       <div className="rise pt-6">
-        <div className="rounded-2xl border border-line bg-card px-6 py-10 text-center">
-          <p className="text-xs font-bold tracking-widest text-gold uppercase">Keputusan</p>
-          <p className="mt-3 font-serif text-6xl font-semibold text-brand">
+        <div className="ornate px-6 py-12 text-center">
+          <p className="rubric">Keputusan</p>
+          <p className="mt-3 font-serif text-5xl font-bold text-brand">
             {score}
             <span className="text-2xl text-soft"> / {total}</span>
           </p>
@@ -101,7 +101,7 @@ export default function Kuiz() {
             <h2 className="mb-3 font-serif text-xl font-semibold">Semak jawapan yang salah</h2>
             <div className="space-y-2.5">
               {wrong.map((q) => (
-                <article key={q.answer.id} className="rounded-2xl border border-line bg-card p-4">
+                <article key={q.answer.id} className="folio p-4">
                   <h3 className="font-serif text-lg font-semibold text-brand">{q.answer.term}</h3>
                   <div className="mt-1 leading-relaxed">
                     <Defs defs={q.answer.defs} />
@@ -134,7 +134,7 @@ export default function Kuiz() {
   return (
     <div className="pt-6">
       <div className="mb-4 flex items-center gap-3">
-        <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-lg text-soft hover:bg-tint">
+        <button type="button" onClick={() => setQs(null)} aria-label="Tamatkan kuiz" className="grid size-10 place-items-center rounded-md text-soft hover:bg-tint">
           <Icon name="x" />
         </button>
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={pos} aria-label="Kemajuan">
@@ -146,8 +146,8 @@ export default function Kuiz() {
       </div>
 
       <div key={pos} className="rise">
-        <div className="rounded-2xl border border-line bg-card p-5 sm:p-6">
-          <p className="text-xs font-bold tracking-widest text-gold uppercase">
+        <div className="ornate px-8 py-8 text-center">
+          <p className="rubric">
             {q.kind === 'istilah' ? 'Apakah istilah bagi maksud ini?' : 'Apakah maksud istilah ini?'}
           </p>
           {q.kind === 'istilah' ? (
@@ -155,7 +155,7 @@ export default function Kuiz() {
               <Rich runs={q.answer.defs[0]} />
             </p>
           ) : (
-            <p className="mt-3 font-serif text-3xl font-semibold text-brand">{q.answer.term}</p>
+            <p className="mt-3 font-serif text-2xl leading-tight font-bold text-brand sm:text-3xl">{q.answer.term}</p>
           )}
         </div>
 
@@ -169,7 +169,7 @@ export default function Kuiz() {
                 type="button"
                 disabled={answered}
                 onClick={() => pick(o)}
-                className={`flex min-h-14 items-center gap-3 rounded-2xl border px-4 py-3 text-left transition disabled:cursor-default ${
+                className={`flex min-h-14 items-center gap-3 rounded-md border px-4 py-3 text-left text-lg transition disabled:cursor-default ${
                   right
                     ? 'border-ok bg-ok/10'
                     : wrong
@@ -180,13 +180,13 @@ export default function Kuiz() {
                 }`}
               >
                 <span
-                  className={`grid size-8 shrink-0 place-items-center rounded-full text-sm font-bold ${
+                  className={`grid size-9 shrink-0 place-items-center rounded-full border border-gold/50 font-serif text-sm font-bold ${
                     right ? 'bg-ok text-paper' : wrong ? 'bg-bad text-paper' : 'bg-tint text-brand'
                   }`}
                 >
                   {right ? <Icon name="check" className="size-4" /> : wrong ? <Icon name="x" className="size-4" /> : 'ABCD'[n]}
                 </span>
-                <span className={q.kind === 'istilah' ? 'font-semibold' : 'leading-snug'}>
+                <span className={q.kind === 'istilah' ? 'font-serif text-base font-bold' : 'leading-snug'}>
                   {q.kind === 'istilah' ? o.term : <Rich runs={o.defs[0]} />}
                 </span>
               </button>
@@ -200,7 +200,7 @@ export default function Kuiz() {
               <p className={`font-semibold ${q.picked === q.answer ? 'text-ok' : 'text-bad'}`}>
                 {q.picked === q.answer ? 'Betul!' : 'Kurang tepat.'}
               </p>
-              <button type="button" autoFocus onClick={() => setPos(pos + 1)} className={btnPrimary}>
+              <button type="button" ref={(el) => el?.focus({ preventScroll: true })} onClick={() => setPos(pos + 1)} className={btnPrimary}>
                 {pos === total - 1 ? 'Lihat keputusan' : 'Seterusnya'} <Icon name="right" className="size-4" />
               </button>
             </>
